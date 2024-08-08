@@ -23,6 +23,7 @@ const Header = () => {
           sx={{
             width: { xs: 190, md: 190 },
             height: "auto",
+            pointerEvents: "cursor",
           }}
         >
           <LogoSVG width="100%" height="100%" color="orange" />

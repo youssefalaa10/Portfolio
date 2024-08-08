@@ -29,7 +29,7 @@ const About = () => {
         }}
       />
       <Container maxWidth="lg" sx={{ mt: { xs: 2, md: 0 } }}>
-        <Typography variant="h4" fontWeight="bold" mb={4}>
+        <Typography variant="h4" fontWeight="bold" mb={4} sx={{ "&:hover": { color: "orange" } }}>
           About Me
         </Typography>
         <Typography variant="body1" mb={4}>

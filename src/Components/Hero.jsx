@@ -44,7 +44,7 @@ const Hero = () => {
       <Box display="flex" flexDirection="column" alignItems="center">
         <Avatar
           alt="Youssef Alaa"
-          src="public/assets/youssef.jpg"
+          src="/assets/youssef.jpg"
           sx={{ 
             width: { xs: 200, md: 300 }, 
             height: { xs: 200, md: 300 }, 
