@@ -102,7 +102,7 @@ const Header = () => {
             sx={{
               padding: { xs: "6px 12px", md: "8px 16px" },
               fontWeight: "bold",
-              borderRadius: "20px",
+              borderRadius: "8px",
               "&:hover": {
                 backgroundColor: "orange",
                 color: "#fff",

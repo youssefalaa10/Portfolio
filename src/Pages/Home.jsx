@@ -5,6 +5,8 @@ import { Box, Container } from "@mui/material";
 import Services from "../Components/Services";
 import Projects from "./Projects";
 import LanguagesAndTools from "../Components/LanguagesAndTools";
+import Certifications from "../Components/Certifications";
+import Footer from "../Components/footer";
 
 function Home() {
   return (
@@ -16,6 +18,8 @@ function Home() {
         <Services />
         <LanguagesAndTools />
         <Projects />
+        <Certifications />
+        <Footer />
       </Container>
     </Box>
   );
