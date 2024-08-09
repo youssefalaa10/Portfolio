@@ -34,7 +34,11 @@ const Services = () => {
         variant="h3"
         component="h2"
         gutterBottom
-        sx={{ marginBottom: "2rem", fontWeight: "bold", "&:hover": { color: "orange" }, }} 
+        sx={{
+          marginBottom: "2rem",
+          fontWeight: "bold",
+          "&:hover": { color: "orange" },
+        }}
       >
         Our Services
       </Typography>
