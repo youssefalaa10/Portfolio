@@ -3,6 +3,7 @@ import Header from "../Components/Header";
 import Hero from "../Components/Hero";
 import { Box, Container } from '@mui/material';
 import Services from "../Components/Services";
+import Projects from "./Projects";
 
 function Home() {
   return (
@@ -12,6 +13,7 @@ function Home() {
         <Hero />
         <About />
         <Services/>
+        <Projects />
       </Container>
     </Box>
   );
