@@ -44,7 +44,7 @@ const ProjectsGrid = () => {
       category: "Web Design",
     },
     {
-      image: "/assets/instaimage.png",
+      image: "/assets/bakery.png",
       title: "Ecommerce Web Page Design",
       category: "Web Design",
     },

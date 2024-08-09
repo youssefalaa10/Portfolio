@@ -38,7 +38,7 @@ const About = () => {
         {skills.map((skill) => (
           <Box key={skill.label} mb={4}>
             <Typography variant="subtitle1" fontWeight="bold">{skill.label}</Typography>
-            <Slider value={skill.value} aria-label={skill.label} disabled color='orange'  />
+            <Slider value={skill.value} aria-label={skill.label} disabled color='orange' />
           </Box>
         ))}
       </Container>

@@ -27,7 +27,7 @@ const Services = () => {
     <Box
       sx={{
         textAlign: "center",
-        padding: "3rem",
+        padding: { xs: "1.5rem", md: "3rem" },
       }}
     >
       <Typography

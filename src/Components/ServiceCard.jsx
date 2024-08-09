@@ -12,7 +12,7 @@ const ServiceCard = ({ icon, title, description }) => {
         padding: 2,
         textAlign: "center",
         backgroundColor: "#fff",
-        "&:hover": { color: "orange" , boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.4)"},
+        "&:hover": { color: "orange", boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.4)" },
       }}
     >
       <CardMedia
@@ -32,7 +32,7 @@ const ServiceCard = ({ icon, title, description }) => {
         <Typography variant="h6" component="h3" gutterBottom>
           {title}
         </Typography>
-        <Typography variant="body2" color="text.secondary"sx={{ "&:hover": { color: "orange" } }}>
+        <Typography variant="body2" color="text.secondary" sx={{ "&:hover": { color: "orange" } }}>
           {description}
         </Typography>
       </CardContent>

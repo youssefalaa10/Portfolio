@@ -1,4 +1,5 @@
-import { AppBar, Toolbar, Button, Box } from "@mui/material";
+import { AppBar, Toolbar, Button, Box, IconButton } from "@mui/material";
+import MenuIcon from '@mui/icons-material/Menu';
 import LogoSVG from "./LogoSvg";
 
 const Header = () => {
@@ -21,7 +22,7 @@ const Header = () => {
         {/* SVG Logo */}
         <Box
           sx={{
-            width: { xs: 190, md: 190 },
+            width: { xs: 160, md: 190 },
             height: "auto",
             pointerEvents: "cursor",
           }}
@@ -29,9 +30,7 @@ const Header = () => {
           <LogoSVG width="100%" height="100%" color="orange" />
         </Box>
 
-        <Box
-          sx={{ display: "flex", alignItems: "center", gap: { xs: 1, md: 2 } }}
-        >
+        <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: "center", gap: { xs: 1, md: 2 } }}>
           <Button
             color="inherit"
             sx={{
@@ -113,6 +112,16 @@ const Header = () => {
             Download CV
           </Button>
         </Box>
+
+        {/* Hamburger Menu for Mobile */}
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          sx={{ display: { xs: 'flex', md: 'none' } }}
+        >
+          <MenuIcon />
+        </IconButton>
       </Toolbar>
     </AppBar>
   );
