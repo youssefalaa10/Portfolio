@@ -6,7 +6,7 @@ import Services from "../Components/Services";
 import Projects from "./Projects";
 import LanguagesAndTools from "../Components/LanguagesAndTools";
 import Certifications from "../Components/Certifications";
-import Footer from "../Components/footer";
+import Footer from "../Components/Footer";
 
 function Home() {
   return (
