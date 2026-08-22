@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "title": "Youssef Alaa — Independent Developer",
+    "description": "Youssef Alaa is an independent developer building products, interfaces, and the systems that connect them — bold ideas, shipped with quiet precision."
+  },
+  "common": {
+    "brand": "Youssef",
+    "skipToContent": "Skip to content",
+    "localTime": "Local time",
+    "menu": "Menu",
+    "switchLocale": "العربية",
+    "switchLocaleLabel": "Switch to Arabic"
+  },
+  "nav": {
+    "home": "Home",
+    "work": "Work",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "eyebrow": "Independent Developer",
+    "headline": [
+      "Bold ideas,",
+      "shipped with",
+      "quiet precision"
+    ],
+    "watermark": "YOUSSEF",
+    "portraitAlt": "Portrait of Youssef Alaa",
+    "revealHint": "Move your cursor across the portrait",
+    "credential": "4 products shipped end to end",
+    "ctaPrimary": "Let's Talk",
+    "ctaSecondary": "View Work",
+    "card": {
+      "items": [
+        {
+          "caption": "Product engineering",
+          "title": "Built to scale."
+        },
+        {
+          "caption": "Mobile apps",
+          "title": "Flutter, end to end."
+        },
+        {
+          "caption": "Interface design",
+          "title": "Crafted to convert."
+        }
+      ],
+      "previous": "Previous discipline",
+      "next": "Next discipline",
+      "select": "Show discipline {index}"
+    },
+    "stack": {
+      "label": "Working with"
+    },
+    "status": {
+      "availability": "Available for work",
+      "location": "Remote-first, worldwide",
+      "scroll": "Scroll to explore"
+    }
+  },
+  "work": {
+    "eyebrow": "Portfolio",
+    "heading": [
+      "Selected Work"
+    ],
+    "intro": "Four products, built and shipped end to end. Case studies are on the way.",
+    "projects": {
+      "bablabab": {
+        "title": "Bablabab",
+        "summary": "A door-to-door e-commerce mobile application built with Flutter and Firebase."
+      },
+      "bella": {
+        "title": "Bella",
+        "summary": "Modern e-commerce platform with a seamless shopping experience across web and mobile."
+      },
+      "kidzoo": {
+        "title": "Kidzoo",
+        "summary": "Interactive educational platform for children with a gamified learning experience."
+      },
+      "montazah": {
+        "title": "Montazah",
+        "summary": "An app for a venue and cafe space offering a relaxing lounge experience, built with Flutter."
+      }
+    }
+  }
+}
