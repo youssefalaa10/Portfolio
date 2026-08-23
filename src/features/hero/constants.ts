@@ -1,22 +1,21 @@
 /**
- * Hero tuning constants. Every number the liquid reveal and the portrait
+ * Hero tuning constants. Every number the cursor relight and the portrait
  * composition depend on lives here, so the canvas and the CSS cannot drift apart.
  */
 
 /**
  * `object-position` for the portrait, as fractions of the container box.
  *
- * CRITICAL: the CSS class on the `<Image>` (`object-[50%_8%]`) and the canvas's
- * cover maths both read from this. If you change one, change both — they must
- * describe the same rectangle or the revealed layer will not register with the
- * base layer underneath it.
+ * CRITICAL: the CSS class on the `<Image>` and the canvas's cover maths both read
+ * from this. If you change one, change both — they must describe the same
+ * rectangle or the light will not land on the subject.
  */
-export const PORTRAIT_OBJECT_POSITION = { x: 0.5, y: 0.08 } as const;
+export const PORTRAIT_OBJECT_POSITION = { x: 0.5, y: 0.04 } as const;
 
-/** Tailwind classes encoding the value above. Kept adjacent on purpose. */
-export const PORTRAIT_OBJECT_POSITION_CLASS = "object-[50%_8%]";
+/** Tailwind class encoding the value above. Kept adjacent on purpose. */
+export const PORTRAIT_OBJECT_POSITION_CLASS = "object-[50%_4%]";
 
-/** Brush and trail behaviour, matching the design reference. */
+/** Brush and trail behaviour, matching the design reference's mechanics. */
 export const REVEAL = {
   /** Brush radius in CSS px. */
   brushRadius: 143,
@@ -37,21 +36,21 @@ export const REVEAL = {
 } as const;
 
 /**
- * The relight applied to the portrait to produce the revealed layer.
+ * Filter applied to the *base* portrait, so the cursor has colour to restore.
  *
- * These are not invented: they were fitted offline against a reference render of
- * the intended warm grade (RMSE 0.065 over the subject's pixels), so the browser
- * reproduces that grade from the single shipped asset instead of downloading a
- * second photograph. `accent` is `--color-accent` (#b15f2c) in linear 0–1.
+ * Kept as a Tailwind class next to the reveal constants because it is half of
+ * the effect: the canvas paints the same photograph unfiltered, and the contrast
+ * between these two states is the whole reveal. Weaken this and the effect
+ * disappears; strengthen it and the resting hero looks like a mistake.
  */
-export const REVEAL_GRADE = {
-  /** Midtone lift. <1 brightens. */
-  gamma: 0.9,
-  /** Overall gain, applied after gamma. */
-  gain: 1,
-  /** Strength of the accent tint in the shadows. */
-  warm: 0.3,
-  accent: [0.694, 0.373, 0.173],
-  /** BT.709 luminance weights. */
-  luma: [0.2126, 0.7152, 0.0722],
+export const PORTRAIT_BASE_FILTER =
+  "saturate-[0.12] contrast-[1.06] brightness-[1.02]";
+
+/** The cursor lens that tracks the pointer across the portrait. */
+export const CURSOR_LENS = {
+  /** Diameter in rem, so it scales with the adaptive grid. */
+  size: 5.5,
+  /** How hard the lens chases the pointer. Lower trails further behind. */
+  stiffness: 260,
+  damping: 28,
 } as const;

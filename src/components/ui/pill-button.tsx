@@ -21,10 +21,21 @@ type PillButtonBaseProps = {
   className?: string;
 };
 
+/**
+ * A pill is exactly one of three things, and the type system says so: a link, an
+ * action, or a form submit. There is no shape where it is ambiguous.
+ */
 type PillButtonProps = PillButtonBaseProps &
   (
-    | { href: string; onClick?: never; type?: never }
-    | { href?: never; onClick: () => void; type?: "button" | "submit" }
+    | {
+        href: string;
+        /** Save the target instead of navigating to it. */
+        download?: string | boolean;
+        onClick?: never;
+        type?: never;
+      }
+    | { href?: never; download?: never; onClick: () => void; type?: "button" }
+    | { href?: never; download?: never; onClick?: never; type: "submit" }
   );
 
 const SURFACE: Record<Variant, string> = {
@@ -42,6 +53,11 @@ const BADGE: Record<Variant, string> = {
 /** True for `mailto:`, `tel:` and absolute URLs — anything that is not an app route. */
 function isExternalHref(href: string): boolean {
   return !href.startsWith("/") && !href.startsWith("#");
+}
+
+/** Only http(s) links get a new tab; `mailto:` must stay in place. */
+function opensInNewTab(href: string): boolean {
+  return /^https?:\/\//i.test(href);
 }
 
 /**
@@ -103,9 +119,18 @@ export function PillButton(props: PillButtonProps) {
   };
 
   if (props.href !== undefined) {
-    if (isExternalHref(props.href)) {
+    // A download must be a plain anchor: routing a file through the client
+    // router would navigate to it rather than save it.
+    if (props.download !== undefined || isExternalHref(props.href)) {
       return (
-        <motion.a {...gesture} href={props.href}>
+        <motion.a
+          {...gesture}
+          href={props.href}
+          download={props.download}
+          {...(opensInNewTab(props.href) && props.download === undefined
+            ? { target: "_blank", rel: "noreferrer noopener" }
+            : null)}
+        >
           {content}
         </motion.a>
       );
@@ -119,7 +144,11 @@ export function PillButton(props: PillButtonProps) {
   }
 
   return (
-    <motion.button {...gesture} type={props.type ?? "button"} onClick={props.onClick}>
+    <motion.button
+      {...gesture}
+      type={props.type ?? "button"}
+      onClick={props.onClick}
+    >
       {content}
     </motion.button>
   );

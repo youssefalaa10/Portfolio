@@ -1,9 +1,9 @@
+import { HeroPortrait } from "./hero-portrait";
 import { HeroWatermark } from "./hero-watermark";
-import { LiquidReveal } from "./liquid-reveal";
 
 type HeroVisualProps = {
   portraitAlt: string;
-  revealHint: string;
+  lensLabel: string;
   watermark: string;
 };
 
@@ -19,10 +19,15 @@ type HeroVisualProps = {
  * The backdrop is CSS, not an image: it reproduces the gradient the portrait was
  * graded against, so the composite reads as one photograph while costing nothing
  * to download and staying sharp at any size.
+ *
+ * The portrait is deliberately large — a little over half the width on desktop,
+ * nearly the full width on mobile — because the reference hero is a full-bleed
+ * photograph. A smaller figure leaves a dead light field beside the headline and
+ * stops reading as a hero at all.
  */
 export function HeroVisual({
   portraitAlt,
-  revealHint,
+  lensLabel,
   watermark,
 }: HeroVisualProps) {
   return (
@@ -31,20 +36,23 @@ export function HeroVisual({
 
       <HeroWatermark>{watermark}</HeroWatermark>
 
-      {/* The portrait box owns the geometry that both the image and the reveal
-          canvas fill. It sits on the bottom edge so the subject is always cropped
-          by the frame rather than floating, at every width. */}
-      <LiquidReveal
+      {/* The portrait box owns the geometry that the image, the relight canvas
+          and the cursor lens all fill. It sits on the bottom edge so the subject
+          is always cropped by the frame rather than floating, at every width. */}
+      {/* On phones the headline has to run across the portrait, so the portrait
+          steps back to being a backdrop. At `sm` and up the columns separate and
+          it comes forward as the subject again. */}
+      <HeroPortrait
         alt={portraitAlt}
-        hint={revealHint}
-        className="portrait-fade absolute bottom-0 end-0 h-full w-[86%] sm:w-[64%] lg:w-[48%] xl:w-[44%]"
+        lensLabel={lensLabel}
+        className="portrait-fade absolute bottom-0 end-0 h-full w-[92%] opacity-55 sm:w-[70%] sm:opacity-100 lg:w-[56%] xl:w-[52%]"
       />
 
       <div aria-hidden className="hero-scrim absolute inset-0" />
 
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-white/30"
+        className="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-white/25"
       />
     </div>
   );

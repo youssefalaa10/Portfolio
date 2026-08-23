@@ -101,6 +101,14 @@ export function Close(props: IconProps) {
   );
 }
 
+export function Download(props: IconProps) {
+  return (
+    <svg {...STROKE} viewBox="0 0 24 24" strokeWidth={2} {...props}>
+      <path d="M12 3v12M7 11l5 5 5-5M4 20h16" />
+    </svg>
+  );
+}
+
 export function MenuGrid(props: IconProps) {
   return (
     <svg {...STROKE} viewBox="0 0 24 24" strokeWidth={2} {...props}>

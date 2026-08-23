@@ -6,13 +6,13 @@
   "common": {
     "brand": "Youssef",
     "skipToContent": "Skip to content",
-    "localTime": "Local time",
     "menu": "Menu",
+    "close": "Close",
+    "downloadCv": "CV",
     "switchLocale": "العربية",
     "switchLocaleLabel": "Switch to Arabic"
   },
   "nav": {
-    "home": "Home",
     "work": "Work",
     "services": "Services",
     "about": "About",
@@ -27,7 +27,7 @@
     ],
     "watermark": "YOUSSEF",
     "portraitAlt": "Portrait of Youssef Alaa",
-    "revealHint": "Move your cursor across the portrait",
+    "lensLabel": "Move to reveal",
     "credential": "4 products shipped end to end",
     "ctaPrimary": "Let's Talk",
     "ctaSecondary": "View Work",
@@ -59,12 +59,34 @@
       "scroll": "Scroll to explore"
     }
   },
+  "about": {
+    "eyebrow": "About",
+    "location": "Working remotely from Cairo, building for teams anywhere.",
+    "statement": [
+      {
+        "text": "I partner with teams to ship"
+      },
+      {
+        "text": "mobile apps, web platforms, and the interfaces that make them worth using.",
+        "tone": "muted"
+      }
+    ],
+    "reachLabel": "Reach me",
+    "downloadCv": "Download CV",
+    "cta": "Download CV"
+  },
+  "band": [
+    "Design",
+    "Build",
+    "Ship"
+  ],
   "work": {
     "eyebrow": "Portfolio",
     "heading": [
       "Selected Work"
     ],
     "intro": "Four products, built and shipped end to end. Case studies are on the way.",
+    "viewAll": "View all work",
     "projects": {
       "bablabab": {
         "title": "Bablabab",
@@ -83,5 +105,94 @@
         "summary": "An app for a venue and cafe space offering a relaxing lounge experience, built with Flutter."
       }
     }
+  },
+  "services": {
+    "eyebrow": "Services",
+    "heading": [
+      "What I do best"
+    ],
+    "items": [
+      {
+        "title": "Mobile Development",
+        "description": "Flutter apps built for both stores from a single codebase."
+      },
+      {
+        "title": "Web Development",
+        "description": "Fast, accessible Next.js products that hold up as they grow."
+      },
+      {
+        "title": "Interface Design",
+        "description": "Interfaces that feel effortless and look sharp on every screen."
+      },
+      {
+        "title": "Backend & Integration",
+        "description": "Firebase, APIs, and the plumbing that keeps a product honest."
+      }
+    ]
+  },
+  "stats": {
+    "eyebrow": "By the numbers",
+    "heading": [
+      "Proof in the work,",
+      "not the words."
+    ],
+    "labels": {
+      "projects": "Products shipped",
+      "years": "Years building",
+      "platforms": "Platforms covered",
+      "commitment": "Shipped end to end"
+    }
+  },
+  "footer": {
+    "brand": "Youssef",
+    "watermark": "YOUSSEF",
+    "cta": [
+      "Have a project",
+      "in mind?",
+      "Let's get to work."
+    ],
+    "ctaButton": "Start a project",
+    "tagline": "An independent developer building products, interfaces, and the systems that connect them.",
+    "columns": {
+      "explore": "Explore",
+      "reach": "Reach me",
+      "social": "Social",
+      "downloadCv": "Download CV"
+    },
+    "legal": "© {year} Youssef Alaa. All rights reserved.",
+    "builtWith": "Built with Next.js"
+  },
+  "request": {
+    "eyebrow": "Start a project",
+    "heading": "Tell me what you're building.",
+    "close": "Close dialog",
+    "fields": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "you@company.com"
+      },
+      "project": {
+        "label": "Project",
+        "placeholder": "A few words about your project, timeline, and budget."
+      }
+    },
+    "note": "I reply within one business day.",
+    "submit": "Send request",
+    "submitting": "Sending…",
+    "success": {
+      "heading": "Request received",
+      "body": "Thanks for reaching out — I'll get back to you within one business day.",
+      "close": "Close"
+    }
+  },
+  "notFound": {
+    "eyebrow": "404",
+    "heading": "This page isn't here yet.",
+    "body": "The rest of the portfolio is still being built. Head back to the start in the meantime.",
+    "cta": "Back home"
   }
 }

@@ -61,6 +61,29 @@
 
   --animate-duration-line: 900ms;
   --animate-duration-word: 700ms;
+
+  /* Infinite ticker. The track holds two identical halves and translates by
+     exactly -50%, so the seam lands where the copies meet and is invisible. */
+  --animate-marquee: marquee 42s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 42s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marquee-reverse {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 /* Font families resolve per locale (see `html[lang]` rules below), so they are
@@ -139,6 +162,20 @@ html {
     --hero-key-x: 26%;
   }
 
+  /* Scrim strength. On phones the headline runs the full width of the portrait,
+     so the wash has to reach further across before it fades out. */
+  :root {
+    --scrim-near: 72%;
+    --scrim-far: 22%;
+  }
+
+  @media (max-width: 639.98px) {
+    :root {
+      --scrim-near: 86%;
+      --scrim-far: 46%;
+    }
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -215,9 +252,21 @@ html {
      about which way the page runs. */
   background-image: linear-gradient(
     to var(--portrait-fade-to, right),
-    color-mix(in oklab, var(--color-white) 72%, transparent) 0%,
-    color-mix(in oklab, var(--color-white) 22%, transparent) 46%,
-    transparent 72%
+    color-mix(in oklab, var(--color-white) var(--scrim-near, 72%), transparent) 0%,
+    color-mix(in oklab, var(--color-white) var(--scrim-far, 22%), transparent) 46%,
+    transparent 76%
+  );
+}
+
+@utility edge-fade-x {
+  /* Softens both ends of a marquee so items enter and leave rather than being
+     clipped by a hard edge. */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--color-black) 8%,
+    var(--color-black) 92%,
+    transparent 100%
   );
 }
 

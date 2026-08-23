@@ -11,6 +11,8 @@ import {
   type Locale,
 } from "@/core/i18n/config";
 import { getDictionary } from "@/core/i18n/dictionaries";
+import { RequestModalProvider } from "@/features/contact/components/request-modal-provider";
+import { SiteFooter } from "@/features/footer/components/site-footer";
 import { SiteHeader } from "@/features/navigation/components/site-header";
 
 import "../globals.css";
@@ -60,9 +62,7 @@ export async function generateMetadata({
     description: dictionary.meta.description,
     alternates: {
       canonical: `/${locale}`,
-      languages: Object.fromEntries(
-        LOCALES.map((code) => [code, `/${code}`]),
-      ),
+      languages: Object.fromEntries(LOCALES.map((code) => [code, `/${code}`])),
     },
     openGraph: {
       title: dictionary.meta.title,
@@ -96,28 +96,42 @@ export default async function LocaleLayout({
         {/* `reducedMotion="user"` drops transform channels and keeps opacity for
             readers who ask for less motion, so no component needs its own guard. */}
         <MotionConfig reducedMotion="user">
-          <AdaptiveGrid />
+          {/* One dialog for the whole page. Children stay server-rendered —
+              wrapping them in a client provider does not change that. */}
+          <RequestModalProvider copy={dictionary.request}>
+            <AdaptiveGrid />
 
-          <a
-            href="#main"
-            className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:start-4 focus-visible:top-4 focus-visible:z-60 focus-visible:rounded-control focus-visible:bg-ink focus-visible:px-4 focus-visible:py-2 focus-visible:text-sm focus-visible:text-white"
-          >
-            {dictionary.common.skipToContent}
-          </a>
+            <a
+              href="#main"
+              className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:start-4 focus-visible:top-4 focus-visible:z-120 focus-visible:rounded-control focus-visible:bg-ink focus-visible:px-4 focus-visible:py-2 focus-visible:text-sm focus-visible:text-white"
+            >
+              {dictionary.common.skipToContent}
+            </a>
 
-          <SiteHeader
-            locale={locale}
-            copy={{
-              brand: dictionary.common.brand,
-              localTime: dictionary.common.localTime,
-              switchLocale: dictionary.common.switchLocale,
-              switchLocaleLabel: dictionary.common.switchLocaleLabel,
-            }}
-          />
+            <SiteHeader
+              locale={locale}
+              labels={dictionary.nav}
+              copy={{
+                brand: dictionary.common.brand,
+                menu: dictionary.common.menu,
+                close: dictionary.common.close,
+                downloadCv: dictionary.common.downloadCv,
+                tagline: dictionary.footer.tagline,
+                switchLocale: dictionary.common.switchLocale,
+                switchLocaleLabel: dictionary.common.switchLocaleLabel,
+              }}
+            />
 
-          <main id="main" className="flex-1">
-            {children}
-          </main>
+            <main id="main" className="flex-1">
+              {children}
+            </main>
+
+            <SiteFooter
+              locale={locale}
+              copy={dictionary.footer}
+              navLabels={dictionary.nav}
+            />
+          </RequestModalProvider>
         </MotionConfig>
       </body>
     </html>
