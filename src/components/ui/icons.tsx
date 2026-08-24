@@ -1,12 +1,7 @@
 import type { SVGProps } from "react";
 
 /**
- * Icon system. Every icon is sized `1em` and painted with `currentColor`, so a
- * call site controls it with `text-*` utilities alone and no icon ever carries a
- * hardcoded colour or pixel size.
- *
- * Adding an icon means adding it here. Inline `<svg>` markup in feature
- * components is a forbidden pattern — see docs/code.md § Forbidden patterns.
+ * Icon system. Every icon is sized `1em` and painted with `currentColor`.
  */
 
 type IconProps = SVGProps<SVGSVGElement>;
@@ -113,6 +108,128 @@ export function MenuGrid(props: IconProps) {
   return (
     <svg {...STROKE} viewBox="0 0 24 24" strokeWidth={2} {...props}>
       <path d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  );
+}
+
+export function Terminal(props: IconProps) {
+  return (
+    <svg {...STROKE} viewBox="0 0 24 24" strokeWidth={1.8} {...props}>
+      <polyline points="4 17 10 11 4 5" />
+      <line x1="12" y1="19" x2="20" y2="19" />
+    </svg>
+  );
+}
+
+export function Sliders(props: IconProps) {
+  return (
+    <svg {...STROKE} viewBox="0 0 24 24" strokeWidth={1.8} {...props}>
+      <line x1="4" y1="21" x2="4" y2="14" />
+      <line x1="4" y1="10" x2="4" y2="3" />
+      <line x1="12" y1="21" x2="12" y2="12" />
+      <line x1="12" y1="8" x2="12" y2="3" />
+      <line x1="20" y1="21" x2="20" y2="16" />
+      <line x1="20" y1="12" x2="20" y2="3" />
+      <line x1="1" y1="14" x2="7" y2="14" />
+      <line x1="9" y1="8" x2="15" y2="8" />
+      <line x1="17" y1="16" x2="23" y2="16" />
+    </svg>
+  );
+}
+
+export function Shield(props: IconProps) {
+  return (
+    <svg {...STROKE} viewBox="0 0 24 24" strokeWidth={1.8} {...props}>
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    </svg>
+  );
+}
+
+export function Cpu(props: IconProps) {
+  return (
+    <svg {...STROKE} viewBox="0 0 24 24" strokeWidth={1.8} {...props}>
+      <rect x="4" y="4" width="16" height="16" rx="2" />
+      <rect x="9" y="9" width="6" height="6" />
+      <line x1="9" y1="1" x2="9" y2="4" />
+      <line x1="15" y1="1" x2="15" y2="4" />
+      <line x1="9" y1="20" x2="9" y2="23" />
+      <line x1="15" y1="20" x2="15" y2="23" />
+      <line x1="20" y1="9" x2="23" y2="9" />
+      <line x1="20" y1="14" x2="23" y2="14" />
+      <line x1="1" y1="9" x2="4" y2="9" />
+      <line x1="1" y1="14" x2="4" y2="14" />
+    </svg>
+  );
+}
+
+export function Lightbulb(props: IconProps) {
+  return (
+    <svg {...STROKE} viewBox="0 0 24 24" strokeWidth={1.8} {...props}>
+      <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-7 7c0 2.8 1.6 5.2 4 6.3V18h6v-2.7c2.4-1.1 4-3.5 4-6.3a7 7 0 0 0-7-7z" />
+    </svg>
+  );
+}
+
+export function Layout(props: IconProps) {
+  return (
+    <svg {...STROKE} viewBox="0 0 24 24" strokeWidth={1.8} {...props}>
+      <rect x="3" y="3" width="18" height="18" rx="2" />
+      <line x1="3" y1="9" x2="21" y2="9" />
+      <line x1="9" y1="21" x2="9" y2="9" />
+    </svg>
+  );
+}
+
+export function Smartphone(props: IconProps) {
+  return (
+    <svg {...STROKE} viewBox="0 0 24 24" strokeWidth={1.8} {...props}>
+      <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+      <line x1="12" y1="18" x2="12.01" y2="18" />
+    </svg>
+  );
+}
+
+export function Monitor(props: IconProps) {
+  return (
+    <svg {...STROKE} viewBox="0 0 24 24" strokeWidth={1.8} {...props}>
+      <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+      <line x1="8" y1="21" x2="16" y2="21" />
+      <line x1="12" y1="17" x2="12" y2="21" />
+    </svg>
+  );
+}
+
+export function Database(props: IconProps) {
+  return (
+    <svg {...STROKE} viewBox="0 0 24 24" strokeWidth={1.8} {...props}>
+      <ellipse cx="12" cy="5" rx="9" ry="3" />
+      <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+      <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+    </svg>
+  );
+}
+
+export function CheckCircle(props: IconProps) {
+  return (
+    <svg {...STROKE} viewBox="0 0 24 24" strokeWidth={2} {...props}>
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+      <polyline points="22 4 12 14.01 9 11.01" />
+    </svg>
+  );
+}
+
+export function Sparkles(props: IconProps) {
+  return (
+    <svg {...BASE} viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M12 2l1.8 4.2L18 8l-4.2 1.8L12 14l-1.8-4.2L6 8l4.2-1.8L12 2zm6 12l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9.9-2.1zM6 14l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9.9-2.1z" />
+    </svg>
+  );
+}
+
+export function DotFilled(props: IconProps) {
+  return (
+    <svg {...BASE} viewBox="0 0 15 15" fill="currentColor" {...props}>
+      <path d="M9.875 7.5a2.375 2.375 0 1 1-4.75 0 2.375 2.375 0 0 1 4.75 0Z" />
     </svg>
   );
 }

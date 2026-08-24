@@ -1,7 +1,11 @@
 {
   "meta": {
     "title": "Youssef Alaa — Independent Developer",
-    "description": "Youssef Alaa is an independent developer building products, interfaces, and the systems that connect them — bold ideas, shipped with quiet precision."
+    "description": "Youssef Alaa is an independent developer building products, interfaces, and the systems that connect them — bold ideas, shipped with quiet precision.",
+    "servicesTitle": "Services // Micro Matrix — Youssef Alaa",
+    "servicesDescription": "Engineered development services: Flutter cross-platform mobile apps, high-performance Next.js web systems, and bespoke UI/UX architecture.",
+    "aboutTitle": "About // Profile & Ethos — Youssef Alaa",
+    "aboutDescription": "Learn about Youssef Alaa's background, engineering philosophy, and experience shipping full-stack products from concept to store release."
   },
   "common": {
     "brand": "Youssef",
@@ -10,7 +14,9 @@
     "close": "Close",
     "downloadCv": "CV",
     "switchLocale": "العربية",
-    "switchLocaleLabel": "Switch to Arabic"
+    "switchLocaleLabel": "Switch to Arabic",
+    "viewAll": "Explore full page",
+    "startProject": "Start a project"
   },
   "nav": {
     "work": "Work",
@@ -20,11 +26,7 @@
   },
   "hero": {
     "eyebrow": "Independent Developer",
-    "headline": [
-      "Bold ideas,",
-      "shipped with",
-      "quiet precision"
-    ],
+    "headline": ["Bold ideas,", "shipped with", "quiet precision"],
     "watermark": "YOUSSEF",
     "portraitAlt": "Portrait of Youssef Alaa",
     "lensLabel": "Move to reveal",
@@ -59,6 +61,102 @@
       "scroll": "Scroll to explore"
     }
   },
+  "home": {
+    "bento": {
+      "eyebrow": "Architecture & Craft",
+      "heading": ["Engineering built", "without compromise"],
+      "intro": "Every application is architected with clean design patterns, 60fps performance benchmarks, and store-ready stability.",
+      "items": [
+        {
+          "tag": "Performance",
+          "title": "Butter-Smooth 60 FPS",
+          "description": "Optimized Flutter rendering trees and micro-benchmarked widget rebuilds for fluid, responsive interactions."
+        },
+        {
+          "tag": "Reliability",
+          "title": "Offline-First State",
+          "description": "Local database caches with seamless background conflict resolution and resilient sync protocols."
+        },
+        {
+          "tag": "Craft",
+          "title": "Pixel-Accurate UI",
+          "description": "Zero tolerance for layout misalignment, jagged viewport transitions, or inconsistent design tokens."
+        },
+        {
+          "tag": "Delivery",
+          "title": "Store Submission Ready",
+          "description": "Complete signing, compliance, deep linking, screenshot suites, and release pipeline management."
+        }
+      ]
+    },
+    "process": {
+      "eyebrow": "Delivery Methodology",
+      "heading": ["From raw blueprint", "to production launch"],
+      "intro": "A structured, transparent four-stage pipeline that guarantees predictable milestones and exceptional output.",
+      "steps": [
+        {
+          "num": "01",
+          "title": "Discovery & Blueprint",
+          "description": "Deconstruct product requirements, map technical user flows, define data architecture, and scope deliverable milestones."
+        },
+        {
+          "num": "02",
+          "title": "UI/UX & Interactive Prototypes",
+          "description": "Design high-fidelity design systems, intuitive navigation gestures, accessible typography, and motion choreography."
+        },
+        {
+          "num": "03",
+          "title": "Clean Code Implementation",
+          "description": "Write modular, testable Flutter and Next.js code with continuous weekly builds and live staging demos."
+        },
+        {
+          "num": "04",
+          "title": "Store Launch & Support",
+          "description": "Deploy to Apple App Store & Google Play, verify analytics & crash monitoring, and ensure seamless operation."
+        }
+      ]
+    },
+    "techShowcase": {
+      "eyebrow": "Tech Arsenal",
+      "heading": ["Battle-tested tools", "for speed & precision"],
+      "intro": "Modern frameworks and cloud stacks curated for speed, maintainability, and enterprise-grade scalability.",
+      "categories": [
+        {
+          "name": "Mobile Ecosystem",
+          "skills": [
+            "Flutter",
+            "Dart",
+            "Bloc / Riverpod",
+            "iOS / Swift Interop",
+            "Android / Kotlin Interop",
+            "Store Release"
+          ]
+        },
+        {
+          "name": "Web & Frontend",
+          "skills": [
+            "Next.js 16",
+            "React 19",
+            "TypeScript",
+            "Tailwind CSS v4",
+            "Motion",
+            "Responsive Architecture"
+          ]
+        },
+        {
+          "name": "Cloud & Backend",
+          "skills": [
+            "Firebase Auth",
+            "Cloud Firestore",
+            "Cloud Functions",
+            "PostgreSQL",
+            "REST APIs",
+            "Git & CI/CD"
+          ]
+        }
+      ]
+    }
+  },
   "about": {
     "eyebrow": "About",
     "location": "Working remotely from Cairo, building for teams anywhere.",
@@ -73,18 +171,67 @@
     ],
     "reachLabel": "Reach me",
     "downloadCv": "Download CV",
-    "cta": "Download CV"
+
+    "cta": "Download CV",
+    "page": {
+      "eyebrow": "Profile & Ethos",
+      "heading": [
+        "Engineering products",
+        "from first concept",
+        "to final store release"
+      ],
+      "bio": "I am Youssef Alaa, an independent software developer and interface craftsman. I specialize in building cross-platform mobile applications with Flutter and high-performance web systems with Next.js. My focus is combining deep architectural rigor with fluid, tactile interactions that make applications memorable.",
+      "philosophyHeading": "Core Engineering Principles",
+      "philosophy": [
+        {
+          "title": "End-to-End Ownership",
+          "description": "From blank canvas to App Store approval, I manage design systems, state architecture, database schemas, and release pipelines."
+        },
+        {
+          "title": "Frictionless Fluidity",
+          "description": "Applications must feel weightless. I obsess over 60fps animations, instant input feedback, and crisp layout rhythm."
+        },
+        {
+          "title": "Resilient Clean Code",
+          "description": "Readable, strongly typed, modular codebases designed to scale seamlessly without technical debt."
+        }
+      ],
+      "timelineHeading": "Journey & Experience",
+      "timeline": [
+        {
+          "year": "2021 — Present",
+          "role": "Independent Product Developer",
+          "description": "Partnering with founders and agencies across MENA and worldwide to architect and deliver mobile and web products."
+        },
+        {
+          "year": "2022 — 2024",
+          "role": "Mobile & Cross-Platform Engineer",
+          "description": "Shipped 4+ full-scale production applications across iOS & Android with Firebase, state machines, and real-time backend integrations."
+        },
+        {
+          "year": "2021 — 2022",
+          "role": "Frontend & Interface Developer",
+          "description": "Engineered responsive component libraries, animated interaction systems, and modern web applications."
+        }
+      ],
+      "skillsHeading": "Core Disciplines",
+      "skills": [
+        { "name": "Flutter & Dart", "level": "Expert" },
+        { "name": "Next.js & React", "level": "Advanced" },
+        { "name": "TypeScript", "level": "Advanced" },
+        { "name": "Firebase Architecture", "level": "Advanced" },
+        { "name": "UI/UX & Motion", "level": "Expert" },
+        { "name": "Store Submissions", "level": "Expert" }
+      ],
+      "ctaHeading": "Ready to build something remarkable?",
+      "ctaSub": "Let's collaborate on your next mobile app or web platform.",
+      "ctaButton": "Start a Conversation"
+    }
   },
-  "band": [
-    "Design",
-    "Build",
-    "Ship"
-  ],
+  "band": ["Design", "Build", "Ship"],
   "work": {
     "eyebrow": "Portfolio",
-    "heading": [
-      "Selected Work"
-    ],
+    "heading": ["Selected Work"],
     "intro": "Four products, built and shipped end to end. Case studies are on the way.",
     "viewAll": "View all work",
     "projects": {
@@ -108,9 +255,7 @@
   },
   "services": {
     "eyebrow": "Services",
-    "heading": [
-      "What I do best"
-    ],
+    "heading": ["What I do best"],
     "items": [
       {
         "title": "Mobile Development",
@@ -128,14 +273,118 @@
         "title": "Backend & Integration",
         "description": "Firebase, APIs, and the plumbing that keeps a product honest."
       }
-    ]
+    ],
+    "page": {
+      "eyebrow": "Environment Specification",
+      "badge": "Enclosed Development Sandbox // V4.0",
+      "title": "Build Deep Inside",
+      "titleHighlight": "The Micro Matrix",
+      "description": "Step inside isolated execution chambers built beneath hardware arrays. Where minimalist ambient desk lamps meet infinite arrays of raw compiling intelligence.",
+      "ctaTerminal": "Initialize Terminal",
+      "ctaReview": "Review Blueprints",
+      "architecture": {
+        "eyebrow": "Environment Specification",
+        "title": "The Enclave Architecture",
+        "description": "By structuralizing developer terminals inside high-clearance physical key capsules, operations are permanently shielded from macro system wide failures. Isolation breeds focus, and micro spaces maximize compilation efficiency.",
+        "stats": [
+          { "value": "99.98%", "label": "Focus Retention" },
+          { "value": "< 1.2ms", "label": "Latency Buffer" }
+        ],
+        "cards": [
+          {
+            "title": "Localized Shell",
+            "description": "Run completely segmented file structures unaffected by the greater operating ecosystem overhead."
+          },
+          {
+            "title": "Warm Illumination",
+            "description": "Calibrated 2700K ambient desk emitters built overhead to maintain focus loops through deep night operations."
+          },
+          {
+            "title": "Matrix Key Binding",
+            "description": "Direct physical mappings linking switches with multi-tier conditional programming macros instantly."
+          },
+          {
+            "title": "Physical Sandbox",
+            "description": "Hardware isolated walls stopping malicious executions from breaking out into external grid channels."
+          }
+        ]
+      },
+      "console": {
+        "eyebrow": "Command Override",
+        "title": "Interactive Sandbox Matrix",
+        "philosophy": "\"Great applications are not born on expansive arrays, but written inside localized pockets of absolute clarity. Own your inputs. Perfect your keycaps.\""
+      },
+      "nodes": {
+        "eyebrow": "Workspace Controls",
+        "title": "Configured Service Nodes",
+        "description": "Toggle through custom execution parameters engineered specifically for enclosed workspace developers.",
+        "items": [
+          {
+            "id": "01",
+            "title": "Mobile Application Matrix",
+            "category": "Flutter / Dart",
+            "description": "Native-grade iOS & Android apps architected with clean state management (Bloc/Riverpod), offline persistence, 60fps animations, and App Store readiness.",
+            "status": "Active Isolation // 60 FPS",
+            "tags": ["Flutter", "Dart", "iOS & Android", "Offline Sync"]
+          },
+          {
+            "id": "02",
+            "title": "Full-Stack Web Systems",
+            "category": "Next.js / TypeScript",
+            "description": "Blazing fast web applications, dynamic App Router platforms, SSR/SSG architectures, and API integrations with bulletproof type safety.",
+            "status": "2700K Calibrated // Sub-second LCP",
+            "tags": ["Next.js 16", "React 19", "Tailwind CSS", "TypeScript"]
+          },
+          {
+            "id": "03",
+            "title": "Interface & Design Engineering",
+            "category": "UI/UX & Motion Systems",
+            "description": "Bespoke design systems, micro-interactions, responsive design matrices, and ergonomic editorial typography that engages users.",
+            "status": "Bound via Layer 2 // Ergonomic UI",
+            "tags": ["Figma", "Design Systems", "Motion", "Micro-Interactions"]
+          },
+          {
+            "id": "04",
+            "title": "Backend & Cloud Architecture",
+            "category": "Firebase / PostgreSQL / Node",
+            "description": "Resilient data models, Firebase Auth & Firestore rules, REST/GraphQL endpoints, cloud functions, and real-time synchronization.",
+            "status": "Secure Tunnel // 99.9% Uptime",
+            "tags": ["Firebase", "PostgreSQL", "REST APIs", "Node.js"]
+          }
+        ]
+      },
+      "hardware": {
+        "eyebrow": "Tactile Interface",
+        "title": "Premium enclosures built for sovereign operators.",
+        "description": "Every enclosure features glass-clear polycarbonate resins that perfectly diffuse deep internal board glows. Own a fully sealed universe tailored exclusively to your execution syntax.",
+        "cta": "Secure Build Slots",
+        "specs": [
+          {
+            "label": "Key Profile",
+            "value": "OEM / High-Transparency Profile"
+          },
+          { "label": "Housing Type", "value": "Thick Polycarbonate Poly" },
+          {
+            "label": "Internal Desk Matrix",
+            "value": "Solid Walnut Facing Veneer"
+          },
+          {
+            "label": "LED Array Configuration",
+            "value": "SMD Neon Filament Simulation"
+          }
+        ]
+      },
+      "subscribe": {
+        "title": "Subscribe to Core Logs",
+        "description": "Get telemetry updates regarding micro environment frameworks, firmware releases, and clear enclosure material drops.",
+        "placeholder": "operator@domain.com",
+        "cta": "Connect Node"
+      }
+    }
   },
   "stats": {
     "eyebrow": "By the numbers",
-    "heading": [
-      "Proof in the work,",
-      "not the words."
-    ],
+    "heading": ["Proof in the work,", "not the words."],
     "labels": {
       "projects": "Products shipped",
       "years": "Years building",
@@ -146,11 +395,7 @@
   "footer": {
     "brand": "Youssef",
     "watermark": "YOUSSEF",
-    "cta": [
-      "Have a project",
-      "in mind?",
-      "Let's get to work."
-    ],
+    "cta": ["Have a project", "in mind?", "Let's get to work."],
     "ctaButton": "Start a project",
     "tagline": "An independent developer building products, interfaces, and the systems that connect them.",
     "columns": {

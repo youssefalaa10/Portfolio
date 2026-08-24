@@ -32,16 +32,16 @@ nothing links to a route that does not exist.
 
 ## 2. Stack
 
-| Concern | Choice | Notes |
-| --- | --- | --- |
-| Framework | Next.js **16.3.2**, App Router | Turbopack is the default for `dev` *and* `build` |
-| Language | TypeScript 5, `strict: true` | `any` is forbidden; so is suppressing errors |
-| UI | React **19.2.8** | React Compiler is **on** (`reactCompiler: true`) |
-| Styling | Tailwind CSS **v4**, CSS-first config | No `tailwind.config.js` — tokens live in `@theme` |
-| Animation | **motion** `^13` (`motion/react`) | The successor to framer-motion |
-| Fonts | `next/font/google` | Onest (latin) + IBM Plex Sans Arabic (arabic) |
-| i18n | Bespoke, ~120 lines | See §7 for why no library |
-| Lint | `eslint-config-next` flat config | `next lint` was removed in 16; run `eslint` |
+| Concern   | Choice                                | Notes                                             |
+| --------- | ------------------------------------- | ------------------------------------------------- |
+| Framework | Next.js **16.3.2**, App Router        | Turbopack is the default for `dev` _and_ `build`  |
+| Language  | TypeScript 5, `strict: true`          | `any` is forbidden; so is suppressing errors      |
+| UI        | React **19.2.8**                      | React Compiler is **on** (`reactCompiler: true`)  |
+| Styling   | Tailwind CSS **v4**, CSS-first config | No `tailwind.config.js` — tokens live in `@theme` |
+| Animation | **motion** `^13` (`motion/react`)     | The successor to framer-motion                    |
+| Fonts     | `next/font/google`                    | Onest (latin) + IBM Plex Sans Arabic (arabic)     |
+| i18n      | Bespoke, ~120 lines                   | See §7 for why no library                         |
+| Lint      | `eslint-config-next` flat config      | `next lint` was removed in 16; run `eslint`       |
 
 ### Version-specific traps in Next 16
 
@@ -52,7 +52,7 @@ These bit during the build and are easy to reintroduce:
   `proxy`, not `middleware`.
 - **The root layout must render `<html>` and `<body>`.** A pass-through root
   layout returning bare `children` throws `missing-root-layout-tags`. This is why
-  `app/[locale]/layout.tsx` *is* the root layout and there is no `app/layout.tsx`.
+  `app/[locale]/layout.tsx` _is_ the root layout and there is no `app/layout.tsx`.
 - **`next/image`'s `priority` prop is deprecated** in favour of `preload`.
 - **`images.qualities` defaults to `[75]`** and is required for other values.
 - **Next no longer applies `scroll-behavior: smooth` implicitly** — `<html>`
@@ -95,12 +95,12 @@ portfolio/
 
 ### Responsibility boundaries
 
-| Layer | Owns | Must not contain |
-| --- | --- | --- |
-| `app/` | routing, layouts, metadata, boundaries, locale segment | UI implementation, business logic |
-| `features/` | domain UI and behaviour for one area | anything another feature imports |
-| `core/` | app-wide infrastructure: motion, i18n, hooks, config, utils | feature-specific logic |
-| `components/ui/` | design-system primitives | domain knowledge, copy |
+| Layer            | Owns                                                        | Must not contain                  |
+| ---------------- | ----------------------------------------------------------- | --------------------------------- |
+| `app/`           | routing, layouts, metadata, boundaries, locale segment      | UI implementation, business logic |
+| `features/`      | domain UI and behaviour for one area                        | anything another feature imports  |
+| `core/`          | app-wide infrastructure: motion, i18n, hooks, config, utils | feature-specific logic            |
+| `components/ui/` | design-system primitives                                    | domain knowledge, copy            |
 
 **Import direction is one-way:** `app` → `features` → `core` / `components/ui`.
 
@@ -124,11 +124,11 @@ return <HomePage locale={locale} dictionary={dictionary} />;
 Every route lives under `/{locale}`. `src/proxy.ts` redirects a bare path to the
 best locale from `Accept-Language`, falling back to `en`.
 
-| Route | State |
-| --- | --- |
-| `/en`, `/ar` | built — the full home page |
-| `/en/work`, `/ar/work` | built (index; factual copy only) |
-| `/{locale}/work/[slug]` | not built — §21 |
+| Route                                | State                                 |
+| ------------------------------------ | ------------------------------------- |
+| `/en`, `/ar`                         | built — the full home page            |
+| `/en/work`, `/ar/work`               | built (index; factual copy only)      |
+| `/{locale}/work/[slug]`              | not built — §21                       |
 | `/{locale}/{about,services,contact}` | **not planned as routes** — see below |
 
 About and Services are **sections of the home page**, reached by hash anchor;
@@ -152,7 +152,7 @@ Router.
 **Rule: no component may hardcode a colour, radius, easing, or duration.**
 
 Tokens are declared once in `src/app/globals.css` under `@theme`, which is what
-makes them Tailwind utilities. Tailwind's default palette is *cleared*
+makes them Tailwind utilities. Tailwind's default palette is _cleared_
 (`--color-*: initial`) so that `bg-zinc-50` and friends do not exist — the only
 reachable colours are semantic ones.
 
@@ -176,7 +176,7 @@ Opacity variants (`text-foreground/70`, `bg-white/40`) are the sanctioned way to
 express the reference's many `rgba()` values — they still resolve to a token.
 
 **Animating a colour is not an exception.** `ServicesSection`'s hover fill
-animates the *opacity of a `bg-surface` layer* rather than interpolating an
+animates the _opacity of a `bg-surface` layer_ rather than interpolating an
 `rgba()` literal, precisely so `--color-surface` stays in one place.
 
 Arbitrary values are allowed only for genuine one-offs that are not part of a
@@ -217,7 +217,7 @@ pluralisation rules, or per-namespace lazy loading become real requirements.
 
 - All user-facing copy comes from `messages/{locale}.json`. A reusable component
   never contains a literal string a reader will see.
-- `messages/en.json` defines the *shape*; `Dictionary = typeof englishMessages`.
+- `messages/en.json` defines the _shape_; `Dictionary = typeof englishMessages`.
   A missing or misspelled key in `ar.json` fails the typecheck.
 - JSON values widen to `string`, so a type that mirrors a message shape must
   accept `string` and narrow at the use site. `WordRun.tone` is the example: only
@@ -246,9 +246,9 @@ pluralisation rules, or per-namespace lazy loading become real requirements.
 - **Motion is physical, not logical.** Where an animation travels along the
   inline axis, wrap it so a `rtl:-scale-x-100` parent mirrors the coordinate
   space. Two shapes, and the difference matters:
-  - *Arrows*: two levels. The flip mirrors the glyph **and** the motion, which is
+  - _Arrows_: two levels. The flip mirrors the glyph **and** the motion, which is
     correct — the arrow should point the other way. See `PillButton`.
-  - *Text*: three levels. Flip, animate, flip back, so the travel reverses but
+  - _Text_: three levels. Flip, animate, flip back, so the travel reverses but
     the label stays readable. See `AnimatedLink`.
 - Arabic UI copy carries **no tashkeel**. The marks render inconsistently across
   weights and add noise at display sizes.
@@ -260,7 +260,7 @@ pluralisation rules, or per-namespace lazy loading become real requirements.
 The layout is authored in `rem` and the root font-size tracks the viewport, so
 proportions hold at every width. Media queries in `globals.css` handle everything
 up to 1920px (each is `16 * 100 / <design base>` vw, for bases 1920/1440/1024/360);
-`core/components/adaptive-grid.tsx` scales *up* beyond 1920 with damping 0.6666.
+`core/components/adaptive-grid.tsx` scales _up_ beyond 1920 with damping 0.6666.
 
 Two deliberate decisions:
 
@@ -268,7 +268,7 @@ Two deliberate decisions:
   breakpoint resolves at exactly 640px, and overlapping there would apply the
   360-base root size to the desktop layout for one pixel.
 - **Accessibility trade-off.** Viewport-relative root sizing ignores the browser's
-  *default font size* preference. Browser and OS zoom still work, because zoom
+  _default font size_ preference. Browser and OS zoom still work, because zoom
   changes the CSS pixel size of a `vw`. This is a known cost of the reference's
   proportional grid; `prefers-reduced-motion` is honoured in full to compensate.
 
@@ -292,13 +292,13 @@ animates `paddingInline` in rem for the same reason.
 
 ### Reveal primitives
 
-| Primitive | Use |
-| --- | --- |
-| `Reveal` | fade-up / fade / scale-in, on mount or in view |
+| Primitive    | Use                                            |
+| ------------ | ---------------------------------------------- |
+| `Reveal`     | fade-up / fade / scale-in, on mount or in view |
 | `LineReveal` | headings — each line rises out of its own clip |
 | `WordReveal` | statements — per-word stagger, with muted runs |
-| `CountUp` | a number that counts up once and holds |
-| `Marquee` | infinite CSS ticker, no JavaScript |
+| `CountUp`    | a number that counts up once and holds         |
+| `Marquee`    | infinite CSS ticker, no JavaScript             |
 
 Explicit `lines` and `runs` arrays come from `messages`, so break points and
 emphasis are translation decisions rather than a consequence of wrapping.
@@ -316,7 +316,7 @@ none should have one. Separately:
 
 ### Hydration and motion
 
-Anything whose rendered *text* depends on a client-only measurement must render
+Anything whose rendered _text_ depends on a client-only measurement must render
 the same thing on the server and on the first client render. `CountUp` starts at
 `0` in both and animates from there; branching on `useReducedMotion()` in the
 returned JSX is what caused React error #418 before it was fixed. The same rule
@@ -344,7 +344,7 @@ smallest wrapper that needs it — `Reveal`, `LineReveal`, `HoverLift` and the
 2. **Edge-decontaminate.** The source is the subject composited over black, so the
    observed pixel is premultiplied: `fg = obs / alpha`. Unpremultiplying recovers
    the true foreground and removes the dark halo on semi-transparent hair.
-3. **Regrade** to a light-key *editorial* print in linear light: black lift 0.028,
+3. **Regrade** to a light-key _editorial_ print in linear light: black lift 0.028,
    gamma 0.88, contrast 1.06, plus a 4% accent tint in the shadows. The suit keeps
    its ink weight — a washed-out grade makes the figure read as a cutout rather
    than a photograph.
@@ -363,7 +363,7 @@ any size, free to download, and adjustable without a re-export.
 
 `HeroVisual` composites back to front: backdrop → watermark → portrait → scrim →
 vignette. The portrait occludes the watermark where the subject is opaque, so the
-name reads as being *behind* him rather than as a flat overlay.
+name reads as being _behind_ him rather than as a flat overlay.
 
 `portrait-fade` intersects two masks — the cropped inline-start edge, and the
 lower edge. The bottom fade is not decoration: without it the near-black suit sits
@@ -377,7 +377,7 @@ Below `sm` the portrait drops to `opacity-55` and the scrim strengthens
 
 The base portrait is a plain `<Image preload>` — the LCP element, server-rendered
 — shown **desaturated** by `PORTRAIT_BASE_FILTER`. The canvas above paints the
-*same* photograph in full colour along the pointer's trail, so moving the cursor
+_same_ photograph in full colour along the pointer's trail, so moving the cursor
 brings the colour back.
 
 Two earlier approaches are recorded in `use-cursor-relight.ts` because both
@@ -391,7 +391,7 @@ produced visible artefacts, and re-deriving either would reintroduce them:
    olive-green with magenta fringes. Measured in-browser, not guessed.
 
 A saturation reveal has neither failure mode: the layers are pixel-identical in
-geometry *and* hue, differing only in chroma, so the brush edge reads as colour
+geometry _and_ hue, differing only in chroma, so the brush edge reads as colour
 blooming rather than as an object with an outline. There is no channel arithmetic
 to blow out, and no CSS blend mode is involved.
 
@@ -434,13 +434,13 @@ context requests `portrait.webp` at all.
 
 Structured, typed data renders the UI; markup never encodes content.
 
-| Data | Home |
-| --- | --- |
-| Nav items and their `kind`, email, technologies, section ids | `core/config/site.ts` |
-| Asset descriptors, CV | `core/config/assets.ts` |
-| Projects | `features/work/data/projects.ts` |
-| Stat values | `features/stats/data/stats.ts` |
-| All copy | `messages/{en,ar}.json` |
+| Data                                                         | Home                             |
+| ------------------------------------------------------------ | -------------------------------- |
+| Nav items and their `kind`, email, technologies, section ids | `core/config/site.ts`            |
+| Asset descriptors, CV                                        | `core/config/assets.ts`          |
+| Projects                                                     | `features/work/data/projects.ts` |
+| Stat values                                                  | `features/stats/data/stats.ts`   |
+| All copy                                                     | `messages/{en,ar}.json`          |
 
 Projects are keyed by `slug` in both the data file and
 `messages.work.projects`, so adding one is a data change in two files and never a
@@ -522,7 +522,7 @@ Non-negotiable:
 **Documented deviations from the reference**, both because fidelity does not
 outrank operability:
 
-- The reference makes the hero card a click target *and* nests previous/next
+- The reference makes the hero card a click target _and_ nests previous/next
   buttons inside it — invalid nesting, unreachable by keyboard. Here the controls
   are the only interactive elements (two buttons plus a dot per slide) and the
   slide is an `aria-live="polite"` region.
@@ -583,13 +583,13 @@ Current runtime dependencies: `next`, `react`, `react-dom`, `motion`. That is al
 
 Decisions on record:
 
-| Considered | Verdict |
-| --- | --- |
-| `motion` | **Installed.** Required for the spring/variant system. |
-| `next-intl` | **Declined.** ~120 lines of bespoke i18n covers the need. §7. |
-| `clsx` + `tailwind-merge` | **Declined.** This project composes classes rather than overriding them; `core/utils/cn.ts` is eight lines. |
-| `lenis` (smooth scroll) | **Declined.** `scroll-behavior: smooth` plus `data-scroll-behavior="smooth"` covers anchor scrolling natively. Momentum smoothing costs a rAF loop that hijacks scrolling for every reader, and it fights `prefers-reduced-motion`. |
-| A focus-trap / dialog library | **Declined.** `use-focus-trap.ts` is 60 lines and the project has exactly two overlays. Revisit if nested dialogs or popovers arrive. |
+| Considered                    | Verdict                                                                                                                                                                                                                             |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `motion`                      | **Installed.** Required for the spring/variant system.                                                                                                                                                                              |
+| `next-intl`                   | **Declined.** ~120 lines of bespoke i18n covers the need. §7.                                                                                                                                                                       |
+| `clsx` + `tailwind-merge`     | **Declined.** This project composes classes rather than overriding them; `core/utils/cn.ts` is eight lines.                                                                                                                         |
+| `lenis` (smooth scroll)       | **Declined.** `scroll-behavior: smooth` plus `data-scroll-behavior="smooth"` covers anchor scrolling natively. Momentum smoothing costs a rAF loop that hijacks scrolling for every reader, and it fights `prefers-reduced-motion`. |
+| A focus-trap / dialog library | **Declined.** `use-focus-trap.ts` is 60 lines and the project has exactly two overlays. Revisit if nested dialogs or popovers arrive.                                                                                               |
 
 ---
 

@@ -6,19 +6,31 @@ import { Shell } from "@/components/ui/shell";
 import { Reveal } from "@/core/components/reveal";
 import { WordReveal } from "@/core/components/word-reveal";
 import { CV_ASSET } from "@/core/config/assets";
-import { CONTACT_HREF, SECTION_ID, SITE, SOCIAL_LINKS } from "@/core/config/site";
+import {
+  CONTACT_HREF,
+  SECTION_ID,
+  SITE,
+  SOCIAL_LINKS,
+} from "@/core/config/site";
+import { localeHref, type Locale } from "@/core/i18n/config";
 import type { Dictionary } from "@/core/i18n/dictionaries";
 import { cn } from "@/core/utils/cn";
 
 type AboutSectionProps = {
+  locale?: Locale;
   copy: Dictionary["about"];
+  exploreLabel?: string;
 };
 
 /**
  * The statement. A word-by-word reveal with the second half muted, so the
  * sentence resolves into its own emphasis as it arrives.
  */
-export function AboutSection({ copy }: AboutSectionProps) {
+export function AboutSection({
+  locale,
+  copy,
+  exploreLabel,
+}: AboutSectionProps) {
   return (
     <section id={SECTION_ID.about} className="bg-background">
       <Shell className="grid grid-cols-1 items-center gap-12 py-20 lg:grid-cols-2 lg:py-28">
@@ -105,14 +117,26 @@ export function AboutSection({ copy }: AboutSectionProps) {
               ) : null}
             </div>
 
-            <PillButton
-              href={CV_ASSET.href}
-              download={CV_ASSET.downloadAs}
-              variant="outline"
-              arrow="right"
-            >
-              {copy.cta}
-            </PillButton>
+            <div className="flex flex-wrap items-center gap-3">
+              {locale ? (
+                <PillButton
+                  href={localeHref(locale, "/about")}
+                  variant="outline"
+                  arrow="right"
+                >
+                  {exploreLabel || copy.page.eyebrow}
+                </PillButton>
+              ) : null}
+
+              <PillButton
+                href={CV_ASSET.href}
+                download={CV_ASSET.downloadAs}
+                variant="outline"
+                arrow="right"
+              >
+                {copy.cta}
+              </PillButton>
+            </div>
           </Reveal>
         </div>
       </Shell>

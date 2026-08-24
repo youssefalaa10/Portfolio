@@ -7,7 +7,10 @@ import { ServicesSection } from "@/features/services/components/services-section
 import { StatsSection } from "@/features/stats/components/stats-section";
 
 import { CreateBand } from "./create-band";
+import { PhilosophyBento } from "./philosophy-bento";
+import { ProcessSection } from "./process-section";
 import { StackMarquee } from "./stack-marquee";
+import { TechShowcase } from "./tech-showcase";
 
 type HomePageProps = {
   locale: Locale;
@@ -15,18 +18,28 @@ type HomePageProps = {
 };
 
 /**
- * Home route composition — the section order and nothing else. The route file
- * stays a two-liner; adding or reordering a section happens here.
+ * Home route composition — rich editorial and interactive sections.
  */
 export function HomePage({ locale, dictionary }: HomePageProps) {
   return (
     <>
       <Hero locale={locale} copy={dictionary.hero} />
-      <AboutSection copy={dictionary.about} />
+      <AboutSection
+        locale={locale}
+        copy={dictionary.about}
+        exploreLabel={dictionary.common.viewAll}
+      />
+      <PhilosophyBento copy={dictionary.home.bento} />
       <CreateBand words={dictionary.band} />
       <StackMarquee label={dictionary.hero.stack.label} />
       <SelectedWork locale={locale} copy={dictionary.work} />
-      <ServicesSection copy={dictionary.services} />
+      <ServicesSection
+        locale={locale}
+        copy={dictionary.services}
+        exploreLabel={dictionary.common.viewAll}
+      />
+      <ProcessSection copy={dictionary.home.process} />
+      <TechShowcase copy={dictionary.home.techShowcase} />
       <StatsSection copy={dictionary.stats} />
     </>
   );

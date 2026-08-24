@@ -72,6 +72,7 @@
   from {
     transform: translate3d(0, 0, 0);
   }
+
   to {
     transform: translate3d(-50%, 0, 0);
   }
@@ -81,6 +82,7 @@
   from {
     transform: translate3d(-50%, 0, 0);
   }
+
   to {
     transform: translate3d(0, 0, 0);
   }
@@ -94,43 +96,20 @@
 }
 
 /* ==========================================================================
-   ADAPTIVE REM GRID
-   The whole layout is authored in rem and the root font-size tracks the
-   viewport, so proportions hold at every width. Each query is
-   `16 * 100 / <design base width>` vw.
-
-   Accessibility note: viewport-relative root sizing ignores the browser's
-   *default font size* preference. Browser/OS zoom still works (zoom changes the
-   CSS pixel size of a vw), and `prefers-reduced-motion` is fully honoured.
-   Documented as a deliberate trade-off in docs/code.md § Responsive rules.
+   RESPONSIVE TYPOGRAPHY & ROOT SIZING
+   Root font-size is kept at standard 16px for full accessibility, crisp rendering
+   in Chrome and all mobile browsers, preventing any microscopic or clipped text.
    ========================================================================== */
 html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
-@media (max-width: 1920px) {
+@media (max-width: 360px) {
   html {
-    font-size: 0.833333vw;
-  } /* base 1920 */
-}
-@media (max-width: 1440px) {
-  html {
-    font-size: 1.111111vw;
-  } /* base 1440 */
-}
-@media (max-width: 1024px) {
-  html {
-    font-size: 1.5625vw;
-  } /* base 1024 */
-}
-/* 639.98px rather than 640px: Tailwind's `sm:` breakpoint resolves at exactly
-   640px, and overlapping there would apply the 360-base mobile root size to the
-   desktop layout for one pixel. */
-@media (max-width: 639.98px) {
-  html {
-    font-size: 4.444444vw;
-  } /* base 360 */
+    font-size: 15px;
+  }
 }
 
 /* ==========================================================================
@@ -233,16 +212,12 @@ html {
      behind the subject. Mirrors the backdrop the portrait asset was graded
      against, so the composite reads as one photograph. */
   background-image:
-    radial-gradient(
-      62% 58% at var(--hero-key-x, 74%) 26%,
+    radial-gradient(62% 58% at var(--hero-key-x, 74%) 26%,
       color-mix(in oklab, var(--color-white) 55%, transparent) 0%,
-      transparent 70%
-    ),
-    linear-gradient(
-      to bottom,
+      transparent 70%),
+    linear-gradient(to bottom,
       var(--color-hero-from) 0%,
-      var(--color-hero-to) 100%
-    );
+      var(--color-hero-to) 100%);
 }
 
 @utility hero-scrim {
@@ -250,24 +225,20 @@ html {
      at the inline start, gone by the time it reaches the subject. Shares
      `--portrait-fade-to` so the scrim and the portrait's feather always agree
      about which way the page runs. */
-  background-image: linear-gradient(
-    to var(--portrait-fade-to, right),
-    color-mix(in oklab, var(--color-white) var(--scrim-near, 72%), transparent) 0%,
-    color-mix(in oklab, var(--color-white) var(--scrim-far, 22%), transparent) 46%,
-    transparent 76%
-  );
+  background-image: linear-gradient(to var(--portrait-fade-to, right),
+      color-mix(in oklab, var(--color-white) var(--scrim-near, 72%), transparent) 0%,
+      color-mix(in oklab, var(--color-white) var(--scrim-far, 22%), transparent) 46%,
+      transparent 76%);
 }
 
 @utility edge-fade-x {
   /* Softens both ends of a marquee so items enter and leave rather than being
      clipped by a hard edge. */
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    var(--color-black) 8%,
-    var(--color-black) 92%,
-    transparent 100%
-  );
+  mask-image: linear-gradient(to right,
+      transparent 0%,
+      var(--color-black) 8%,
+      var(--color-black) 92%,
+      transparent 100%);
 }
 
 @utility portrait-fade {
@@ -280,18 +251,79 @@ html {
      fallback is for WebKit before it adopted the standard property; Tailwind
      cannot express mask compositing, which is why this lives in CSS. */
   mask-image:
-    linear-gradient(
-      to var(--portrait-fade-to, right),
+    linear-gradient(to var(--portrait-fade-to, right),
       transparent 0%,
       var(--color-black) 20%,
-      var(--color-black) 100%
-    ),
-    linear-gradient(
-      to top,
+      var(--color-black) 100%),
+    linear-gradient(to top,
       transparent 0%,
       var(--color-black) 30%,
-      var(--color-black) 100%
-    );
+      var(--color-black) 100%);
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
+}
+
+/* ==========================================================================
+   TERMINAL & CYBER MATRIX UTILITIES (Services & Interactive Nodes)
+   ========================================================================== */
+.terminal-grid {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
+.ambient-lamp {
+  background: radial-gradient(circle at 50% 50%, rgba(255, 176, 58, 0.12) 0%, rgba(56, 189, 248, 0.03) 45%, transparent 70%);
+}
+
+.keycap-glow {
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.2), inset 0 0 15px rgba(56, 189, 248, 0.08);
+}
+
+.keycap-glow:hover {
+  box-shadow: 0 0 45px rgba(255, 176, 58, 0.35), inset 0 0 20px rgba(255, 176, 58, 0.15);
+}
+
+.cursor-blink::after {
+  content: "█";
+  animation: cursor-blink-anim 1s step-end infinite;
+  display: inline-block;
+  margin-inline-start: 4px;
+}
+
+@keyframes cursor-blink-anim {
+
+  from,
+  to {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.particle-drift {
+  animation: driftDown 6s linear infinite;
+}
+
+@keyframes driftDown {
+  0% {
+    transform: translateY(-10vh) translateX(0) scale(0.85);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.9;
+  }
+
+  85% {
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateY(110vh) translateX(30px) scale(1.05);
+    opacity: 0;
+  }
 }

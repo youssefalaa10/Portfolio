@@ -51,11 +51,7 @@ export function NavLink({
     );
   }
 
-  // Anchors are built locale-first so a section link still resolves from /work.
-  const href =
-    item.kind === "route"
-      ? localeHref(locale, item.path)
-      : `${localeHref(locale)}#${item.hash}`;
+  const href = localeHref(locale, item.path);
 
   return (
     <Link href={href} className={className} onClick={onNavigate}>

@@ -14,15 +14,6 @@ export type ImageAsset = {
 
 /**
  * The hero portrait.
- *
- * Derived from `public/images/formal.png`: matted off its near-black studio
- * ground, edge-decontaminated, and given a light-key *editorial* grade — the
- * suit keeps its ink weight so the figure reads as a photograph against the
- * light backdrop rather than as a washed-out cutout.
- *
- * Kept at the original 941×1360 rather than using `formal-2.png` (415×601),
- * which is the same cutout at 2.3× less resolution than the hero needs.
- * Generation is documented in docs/code.md § Asset rules.
  */
 export const HERO_PORTRAIT: ImageAsset = {
   src: "/images/hero/portrait.png",
@@ -39,4 +30,10 @@ export const CV_ASSET = {
   href: "/Youssef_Alaa_Flutter-CV.pdf",
   /** Filename the browser saves it as. */
   downloadAs: "Youssef-Alaa-CV.pdf",
+} as const;
+
+/** Services page ambient background video. */
+export const SERVICES_VIDEO = {
+  src: "/enter_vd.mp4",
+  type: "video/mp4",
 } as const;

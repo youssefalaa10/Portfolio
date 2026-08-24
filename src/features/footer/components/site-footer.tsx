@@ -21,8 +21,7 @@ type SiteFooterProps = {
   navLabels: Dictionary["nav"];
 };
 
-const COLUMN_TITLE =
-  "text-xs uppercase tracking-[0.025em] text-white/40";
+const COLUMN_TITLE = "text-xs uppercase tracking-[0.025em] text-white/40";
 
 export function SiteFooter({ locale, copy, navLabels }: SiteFooterProps) {
   const year = new Date().getFullYear();
