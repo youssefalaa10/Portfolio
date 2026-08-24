@@ -70,15 +70,6 @@ export function Star(props: IconProps) {
   );
 }
 
-export function Globe(props: IconProps) {
-  return (
-    <svg {...STROKE} viewBox="0 0 24 24" strokeWidth={1.4} {...props}>
-      <circle cx={12} cy={12} r={9.25} />
-      <path d="M12 2.75c2.6 2.3 4 5.8 4 9.25s-1.4 6.95-4 9.25c-2.6-2.3-4-5.8-4-9.25s1.4-6.95 4-9.25zM2.75 12h18.5" />
-    </svg>
-  );
-}
-
 export function CircleDot(props: IconProps) {
   return (
     <svg {...STROKE} viewBox="0 0 24 24" strokeWidth={1.6} {...props}>
@@ -218,18 +209,54 @@ export function CheckCircle(props: IconProps) {
   );
 }
 
-export function Sparkles(props: IconProps) {
-  return (
-    <svg {...BASE} viewBox="0 0 24 24" fill="currentColor" {...props}>
-      <path d="M12 2l1.8 4.2L18 8l-4.2 1.8L12 14l-1.8-4.2L6 8l4.2-1.8L12 2zm6 12l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9.9-2.1zM6 14l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9.9-2.1z" />
-    </svg>
-  );
-}
-
 export function DotFilled(props: IconProps) {
   return (
     <svg {...BASE} viewBox="0 0 15 15" fill="currentColor" {...props}>
       <path d="M9.875 7.5a2.375 2.375 0 1 1-4.75 0 2.375 2.375 0 0 1 4.75 0Z" />
+    </svg>
+  );
+}
+
+/** Flutter's folded-sheet mark, drawn flat in a single colour. */
+export function Flutter(props: IconProps) {
+  return (
+    <svg {...BASE} viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M14.3 1.5 4.2 11.6l3.1 3.1L20.5 1.5h-6.2Zm0 9.9L8.6 17.1l5.7 5.7h6.2l-5.7-5.7 5.7-5.7h-6.2Z" />
+    </svg>
+  );
+}
+
+export function Wrench(props: IconProps) {
+  return (
+    <svg {...STROKE} viewBox="0 0 24 24" strokeWidth={1.6} {...props}>
+      <path d="M15.5 6.5a3.5 3.5 0 0 0 4.6 4.6l-8.6 8.6a2.6 2.6 0 0 1-3.7-3.7l8.6-8.6a3.5 3.5 0 0 1-.9-.9Z" />
+      <path d="M18.5 3.5 21 6l-2.5 2.5" />
+    </svg>
+  );
+}
+
+export function Layers(props: IconProps) {
+  return (
+    <svg {...STROKE} viewBox="0 0 24 24" strokeWidth={1.6} {...props}>
+      <path d="M12 3 3 8l9 5 9-5-9-5ZM3 13l9 5 9-5" />
+    </svg>
+  );
+}
+
+export function Plug(props: IconProps) {
+  return (
+    <svg {...STROKE} viewBox="0 0 24 24" strokeWidth={1.6} {...props}>
+      <path d="M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0V8ZM12 17v4" />
+    </svg>
+  );
+}
+
+export function Gauge(props: IconProps) {
+  return (
+    <svg {...STROKE} viewBox="0 0 24 24" strokeWidth={1.6} {...props}>
+      <path d="M3.5 17a9 9 0 1 1 17 0" />
+      <path d="M12 13.5 16 9.5" />
+      <circle cx={12} cy={17} r={1.6} fill="currentColor" stroke="none" />
     </svg>
   );
 }

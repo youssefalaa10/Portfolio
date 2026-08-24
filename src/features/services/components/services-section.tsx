@@ -30,7 +30,10 @@ export function ServicesSection({
   const servicesHref = localeHref(locale, "/services");
 
   return (
-    <section id={SECTION_ID.services} className="border-b border-line bg-background">
+    <section
+      id={SECTION_ID.services}
+      className="border-b border-line bg-background"
+    >
       <Shell className="flex flex-col gap-12 py-20 lg:py-28">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading
@@ -73,7 +76,7 @@ export function ServicesSection({
                     transition={SPRING.reveal}
                   />
 
-                  <span className="w-7 shrink-0 text-sm font-medium tabular-nums text-foreground/40 sm:w-10">
+                  <span className="w-7 shrink-0 font-mono text-sm font-medium tabular-nums text-foreground/40 sm:w-10">
                     {`0${index + 1}`}
                   </span>
 
@@ -85,12 +88,7 @@ export function ServicesSection({
                     {item.description}
                   </p>
 
-                  <motion.span
-                    aria-hidden
-                    className="grid size-10 shrink-0 place-items-center rounded-pill bg-ink text-white sm:size-12"
-                    variants={{ rest: { x: 0 }, hover: { x: 5 } }}
-                    transition={SPRING.nudge}
-                  >
+                  <motion.span aria-hidden transition={SPRING.nudge}>
                     <span className="inline-flex rtl:-scale-x-100">
                       <ArrowUpRight />
                     </span>

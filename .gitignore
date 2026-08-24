@@ -12,7 +12,9 @@
 
 # testing
 /coverage
-
+_incoming/
+_recovered/
+_to_delete/
 # next.js
 /.next/
 /out/

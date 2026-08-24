@@ -4,6 +4,8 @@ import { AboutSection } from "@/features/about/components/about-section";
 import { Hero } from "@/features/hero/components/hero";
 import { SelectedWork } from "@/features/work/components/selected-work";
 import { ServicesSection } from "@/features/services/components/services-section";
+import { AppBand } from "@/features/showcase/components/app-band";
+import { PhoneShowcase } from "@/features/showcase/components/phone-showcase";
 import { StatsSection } from "@/features/stats/components/stats-section";
 
 import { CreateBand } from "./create-band";
@@ -24,6 +26,11 @@ export function HomePage({ locale, dictionary }: HomePageProps) {
   return (
     <>
       <Hero locale={locale} copy={dictionary.hero} />
+      {/* Sits immediately after the hero and overlaps up into it, so the two
+          read as one continuous view rather than two stacked blocks. */}
+      <PhoneShowcase copy={dictionary.showcase} />
+      {/* The accent at full strength, once per page. */}
+      <AppBand copy={dictionary.appBand} />
       <AboutSection
         locale={locale}
         copy={dictionary.about}

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { HoverLift } from "@/components/ui/hover-lift";
-import { Globe } from "@/components/ui/icons";
 import {
   LOCALES,
   localizePathname,
@@ -45,9 +44,8 @@ export function LocaleSwitcher({
         lift={0}
         scale={1.05}
         spring="hover"
-        className="flex items-center gap-2 px-4 py-2 text-xs font-medium uppercase tracking-[0.05em] text-foreground"
+        className="flex items-center px-4 py-2 text-xs font-medium uppercase tracking-[0.05em] text-foreground"
       >
-        <Globe className="text-sm text-foreground/60" />
         {label}
       </HoverLift>
     </Link>

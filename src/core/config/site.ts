@@ -63,3 +63,21 @@ export type SocialLink = {
 };
 
 export const SOCIAL_LINKS: readonly SocialLink[] = [];
+
+/**
+ * Support link ("buy me a coffee"). Empty until you paste your URL — the block
+ * in the About section hides itself while this is blank, exactly like
+ * `SOCIAL_LINKS`, so the page is never showing a button that goes nowhere.
+ *
+ *   export const SUPPORT_LINK = "https://buymeacoffee.com/<you>";
+ */
+export const SUPPORT_LINK = "" as string;
+
+/**
+ * Live store listings for the apps. Same rule: each badge renders only once its
+ * URL exists, so the app band ships complete either way.
+ */
+export const STORE_LINKS = {
+  appStore: "" as string,
+  googlePlay: "" as string,
+} as const;

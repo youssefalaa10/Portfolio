@@ -6,21 +6,22 @@ import Image from "next/image";
 import {
   ArrowRight,
   CheckCircle,
+  CircleDot,
   Cpu,
   Download,
-  Globe,
+  Layers,
   Layout,
   Lightbulb,
   LogoMark,
   Shield,
   Smartphone,
-  Sparkles,
 } from "@/components/ui/icons";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { LineReveal } from "@/core/components/line-reveal";
 import { PillButton } from "@/components/ui/pill-button";
 import { Reveal } from "@/core/components/reveal";
 import { Shell } from "@/components/ui/shell";
+import { SupportCard } from "./support-card";
 import { CV_ASSET, HERO_PORTRAIT } from "@/core/config/assets";
 import { CONTACT_HREF, SITE } from "@/core/config/site";
 import type { Locale } from "@/core/i18n/config";
@@ -43,7 +44,7 @@ export function AboutPage({ locale, copy }: AboutPageProps) {
       case 0:
         return <Shield className="text-2xl text-accent" />;
       case 1:
-        return <Sparkles className="text-2xl text-accent" />;
+        return <Layers className="text-2xl text-accent" />;
       default:
         return <Cpu className="text-2xl text-accent" />;
     }
@@ -116,7 +117,7 @@ export function AboutPage({ locale, copy }: AboutPageProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 <div className="absolute bottom-6 start-6 end-6 text-white">
                   <div className="flex items-center gap-2 text-xs font-medium text-white/80">
-                    <Globe className="text-sm text-accent-from" />
+                    <CircleDot className="text-sm text-accent-from" />
                     <span>{copy.location}</span>
                   </div>
                   <div className="mt-1 text-lg font-semibold">{SITE.name}</div>
@@ -230,6 +231,15 @@ export function AboutPage({ locale, copy }: AboutPageProps) {
               </div>
             ))}
           </div>
+        </Shell>
+      </section>
+
+      {/* SUPPORT — renders only once SUPPORT_LINK is set. */}
+      <section className="pb-20 lg:pb-28">
+        <Shell>
+          <Reveal distance={1.25}>
+            <SupportCard copy={copy.support} className="mx-auto max-w-2xl" />
+          </Reveal>
         </Shell>
       </section>
 

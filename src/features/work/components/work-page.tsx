@@ -6,6 +6,7 @@ import type { Dictionary } from "@/core/i18n/dictionaries";
 import { STAGGER } from "@/core/motion/springs";
 
 import { ProjectGrid } from "./project-grid";
+import { ProjectSpotlight } from "./project-spotlight";
 
 type WorkPageProps = {
   copy: Dictionary["work"];
@@ -29,10 +30,30 @@ export function WorkPage({ copy }: WorkPageProps) {
       />
 
       <Reveal trigger="mount" delay={0.2}>
-        <p className="max-w-[52ch] text-sm text-foreground/60">{copy.intro}</p>
+        <p className="max-w-[52ch] text-base text-foreground/60">{copy.intro}</p>
       </Reveal>
 
-      <div className="mt-6">
+      {/* Spotlight first — one project at a time, in detail — then the full
+          index below it. The grid is the reference; this is the introduction. */}
+      <Reveal preset="fade-up" distance={0.625} trigger="mount" delay={0.28} className="mt-8">
+        <Eyebrow>{copy.spotlight.eyebrow}</Eyebrow>
+      </Reveal>
+
+      <Reveal trigger="mount" delay={0.34} className="mt-2">
+        <ProjectSpotlight
+          copy={copy.projects}
+          labels={{
+            previous: copy.spotlight.previous,
+            next: copy.spotlight.next,
+            select: copy.spotlight.select,
+          }}
+        />
+      </Reveal>
+
+      <div className="mt-20 flex flex-col gap-8 border-t border-line pt-16">
+        <Reveal preset="fade-up" distance={0.625}>
+          <Eyebrow>{copy.spotlight.all}</Eyebrow>
+        </Reveal>
         <ProjectGrid copy={copy.projects} />
       </div>
     </Shell>

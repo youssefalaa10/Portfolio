@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 
-import { Cpu, Layout, Shield, Sparkles } from "@/components/ui/icons";
+import { Cpu, Layers, Layout, Shield } from "@/components/ui/icons";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Shell } from "@/components/ui/shell";
 import type { Dictionary } from "@/core/i18n/dictionaries";
@@ -16,7 +16,7 @@ export function PhilosophyBento({ copy }: PhilosophyBentoProps) {
   const getIcon = (index: number) => {
     switch (index) {
       case 0:
-        return <Sparkles className="text-xl text-accent" />;
+        return <Layers className="text-xl text-accent" />;
       case 1:
         return <Shield className="text-xl text-accent" />;
       case 2:

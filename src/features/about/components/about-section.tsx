@@ -1,10 +1,11 @@
 import { AnimatedLink } from "@/components/ui/animated-link";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { CircleDot, Download, Globe } from "@/components/ui/icons";
+import { CircleDot, Download, LogoMark } from "@/components/ui/icons";
 import { PillButton } from "@/components/ui/pill-button";
 import { Shell } from "@/components/ui/shell";
 import { Reveal } from "@/core/components/reveal";
 import { WordReveal } from "@/core/components/word-reveal";
+import { SupportCard } from "./support-card";
 import { CV_ASSET } from "@/core/config/assets";
 import {
   CONTACT_HREF,
@@ -34,11 +35,14 @@ export function AboutSection({
   return (
     <section id={SECTION_ID.about} className="bg-background">
       <Shell className="grid grid-cols-1 items-center gap-12 py-20 lg:grid-cols-2 lg:py-28">
-        {/* Left: the globe motif. */}
-        <div className="relative min-h-56 lg:min-h-80">
-          <Globe
+        {/* Left: the oversized mark, then the working details.
+            This used to be a giant globe outline. It went with the Globe icon,
+            and it was saying nothing the copy did not already say — the mark
+            carries the same decorative weight while belonging to the brand. */}
+        <div className="relative flex min-h-56 flex-col justify-between gap-10 lg:min-h-80">
+          <LogoMark
             aria-hidden
-            className="pointer-events-none absolute top-1/2 -start-4 -translate-y-1/2 text-[12rem] text-foreground/10 sm:text-[16rem] lg:-start-6 lg:text-[20rem]"
+            className="pointer-events-none absolute -top-6 start-0 text-[11rem] text-foreground/[0.06] sm:text-[15rem] lg:-start-6 lg:text-[18rem]"
           />
 
           <Reveal preset="fade-up" distance={0.625} className="relative">
@@ -48,10 +52,18 @@ export function AboutSection({
           <Reveal
             distance={0.75}
             delay={0.15}
-            className="absolute bottom-0 start-0 flex items-center gap-3 text-sm text-foreground/70"
+            className="relative flex flex-col gap-4 border-s-2 border-accent/30 ps-5"
           >
-            <Globe className="shrink-0 text-2xl text-foreground" />
-            <span className="max-w-56">{copy.location}</span>
+            <span className="max-w-64 text-base text-foreground/70">
+              {copy.location}
+            </span>
+            <span className="text-micro font-medium uppercase tracking-[0.08em] text-foreground/40">
+              {`${SITE.workingSince} — ${new Date().getFullYear()}`}
+            </span>
+          </Reveal>
+
+          <Reveal distance={0.75} delay={0.25} className="relative">
+            <SupportCard copy={copy.support} />
           </Reveal>
         </div>
 

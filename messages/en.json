@@ -26,7 +26,11 @@
   },
   "hero": {
     "eyebrow": "Independent Developer",
-    "headline": ["Bold ideas,", "shipped with", "quiet precision"],
+    "headline": [
+      "Bold ideas,",
+      "shipped with",
+      "quiet precision"
+    ],
     "watermark": "YOUSSEF",
     "portraitAlt": "Portrait of Youssef Alaa",
     "lensLabel": "Move to reveal",
@@ -61,10 +65,44 @@
       "scroll": "Scroll to explore"
     }
   },
+  "showcase": {
+    "eyebrow": "Mobile development",
+    "heading": [
+      "I build and maintain",
+      "mobile applications."
+    ],
+    "body": "From the first Flutter widget to the store listing and every release after it — one codebase, both platforms, looked after long after launch.",
+    "screenLabel": "An illustration of a mobile app interface built with Flutter.",
+    "labels": {
+      "development": "Development",
+      "maintenance": "Maintenance",
+      "flutter": "Flutter",
+      "mobile": "Mobile Apps",
+      "api": "API Integration",
+      "performance": "Performance"
+    }
+  },
+  "appBand": {
+    "eyebrow": "On both stores",
+    "heading": [
+      "One codebase,",
+      "both platforms."
+    ],
+    "body": "Flutter apps built, submitted and maintained end to end — iOS and Android from a single codebase, with releases looked after long after launch.",
+    "cta": "Start a project",
+    "screenLabel": "An illustration of a mobile app interface built with Flutter.",
+    "appStoreKicker": "Download on the",
+    "appStoreName": "App Store",
+    "googlePlayKicker": "Get it on",
+    "googlePlayName": "Google Play"
+  },
   "home": {
     "bento": {
       "eyebrow": "Architecture & Craft",
-      "heading": ["Engineering built", "without compromise"],
+      "heading": [
+        "Engineering built",
+        "without compromise"
+      ],
       "intro": "Every application is architected with clean design patterns, 60fps performance benchmarks, and store-ready stability.",
       "items": [
         {
@@ -91,7 +129,10 @@
     },
     "process": {
       "eyebrow": "Delivery Methodology",
-      "heading": ["From raw blueprint", "to production launch"],
+      "heading": [
+        "From raw blueprint",
+        "to production launch"
+      ],
       "intro": "A structured, transparent four-stage pipeline that guarantees predictable milestones and exceptional output.",
       "steps": [
         {
@@ -118,7 +159,10 @@
     },
     "techShowcase": {
       "eyebrow": "Tech Arsenal",
-      "heading": ["Battle-tested tools", "for speed & precision"],
+      "heading": [
+        "Battle-tested tools",
+        "for speed & precision"
+      ],
       "intro": "Modern frameworks and cloud stacks curated for speed, maintainability, and enterprise-grade scalability.",
       "categories": [
         {
@@ -160,6 +204,12 @@
   "about": {
     "eyebrow": "About",
     "location": "Working remotely from Cairo, building for teams anywhere.",
+    "support": {
+      "label": "Support the work",
+      "title": "Buy me a million coffees",
+      "body": "If something here saved you time, a coffee keeps the next one coming.",
+      "cta": "Open the support page in a new tab"
+    },
     "statement": [
       {
         "text": "I partner with teams to ship"
@@ -171,7 +221,6 @@
     ],
     "reachLabel": "Reach me",
     "downloadCv": "Download CV",
-
     "cta": "Download CV",
     "page": {
       "eyebrow": "Profile & Ethos",
@@ -216,22 +265,46 @@
       ],
       "skillsHeading": "Core Disciplines",
       "skills": [
-        { "name": "Flutter & Dart", "level": "Expert" },
-        { "name": "Next.js & React", "level": "Advanced" },
-        { "name": "TypeScript", "level": "Advanced" },
-        { "name": "Firebase Architecture", "level": "Advanced" },
-        { "name": "UI/UX & Motion", "level": "Expert" },
-        { "name": "Store Submissions", "level": "Expert" }
+        {
+          "name": "Flutter & Dart",
+          "level": "Expert"
+        },
+        {
+          "name": "Next.js & React",
+          "level": "Advanced"
+        },
+        {
+          "name": "TypeScript",
+          "level": "Advanced"
+        },
+        {
+          "name": "Firebase Architecture",
+          "level": "Advanced"
+        },
+        {
+          "name": "UI/UX & Motion",
+          "level": "Expert"
+        },
+        {
+          "name": "Store Submissions",
+          "level": "Expert"
+        }
       ],
       "ctaHeading": "Ready to build something remarkable?",
       "ctaSub": "Let's collaborate on your next mobile app or web platform.",
       "ctaButton": "Start a Conversation"
     }
   },
-  "band": ["Design", "Build", "Ship"],
+  "band": [
+    "Design",
+    "Build",
+    "Ship"
+  ],
   "work": {
     "eyebrow": "Portfolio",
-    "heading": ["Selected Work"],
+    "heading": [
+      "Selected Work"
+    ],
     "intro": "Four products, built and shipped end to end. Case studies are on the way.",
     "viewAll": "View all work",
     "projects": {
@@ -251,11 +324,23 @@
         "title": "Montazah",
         "summary": "An app for a venue and cafe space offering a relaxing lounge experience, built with Flutter."
       }
+    },
+    "spotlight": {
+      "eyebrow": "Spotlight",
+      "heading": [
+        "A closer look."
+      ],
+      "previous": "Previous project",
+      "next": "Next project",
+      "select": "Show project {index}",
+      "all": "Every project"
     }
   },
   "services": {
     "eyebrow": "Services",
-    "heading": ["What I do best"],
+    "heading": [
+      "What I do best"
+    ],
     "items": [
       {
         "title": "Mobile Development",
@@ -287,8 +372,14 @@
         "title": "The Enclave Architecture",
         "description": "By structuralizing developer terminals inside high-clearance physical key capsules, operations are permanently shielded from macro system wide failures. Isolation breeds focus, and micro spaces maximize compilation efficiency.",
         "stats": [
-          { "value": "99.98%", "label": "Focus Retention" },
-          { "value": "< 1.2ms", "label": "Latency Buffer" }
+          {
+            "value": "99.98%",
+            "label": "Focus Retention"
+          },
+          {
+            "value": "< 1.2ms",
+            "label": "Latency Buffer"
+          }
         ],
         "cards": [
           {
@@ -325,7 +416,12 @@
             "category": "Flutter / Dart",
             "description": "Native-grade iOS & Android apps architected with clean state management (Bloc/Riverpod), offline persistence, 60fps animations, and App Store readiness.",
             "status": "Active Isolation // 60 FPS",
-            "tags": ["Flutter", "Dart", "iOS & Android", "Offline Sync"]
+            "tags": [
+              "Flutter",
+              "Dart",
+              "iOS & Android",
+              "Offline Sync"
+            ]
           },
           {
             "id": "02",
@@ -333,7 +429,12 @@
             "category": "Next.js / TypeScript",
             "description": "Blazing fast web applications, dynamic App Router platforms, SSR/SSG architectures, and API integrations with bulletproof type safety.",
             "status": "2700K Calibrated // Sub-second LCP",
-            "tags": ["Next.js 16", "React 19", "Tailwind CSS", "TypeScript"]
+            "tags": [
+              "Next.js 16",
+              "React 19",
+              "Tailwind CSS",
+              "TypeScript"
+            ]
           },
           {
             "id": "03",
@@ -341,7 +442,12 @@
             "category": "UI/UX & Motion Systems",
             "description": "Bespoke design systems, micro-interactions, responsive design matrices, and ergonomic editorial typography that engages users.",
             "status": "Bound via Layer 2 // Ergonomic UI",
-            "tags": ["Figma", "Design Systems", "Motion", "Micro-Interactions"]
+            "tags": [
+              "Figma",
+              "Design Systems",
+              "Motion",
+              "Micro-Interactions"
+            ]
           },
           {
             "id": "04",
@@ -349,7 +455,12 @@
             "category": "Firebase / PostgreSQL / Node",
             "description": "Resilient data models, Firebase Auth & Firestore rules, REST/GraphQL endpoints, cloud functions, and real-time synchronization.",
             "status": "Secure Tunnel // 99.9% Uptime",
-            "tags": ["Firebase", "PostgreSQL", "REST APIs", "Node.js"]
+            "tags": [
+              "Firebase",
+              "PostgreSQL",
+              "REST APIs",
+              "Node.js"
+            ]
           }
         ]
       },
@@ -363,7 +474,10 @@
             "label": "Key Profile",
             "value": "OEM / High-Transparency Profile"
           },
-          { "label": "Housing Type", "value": "Thick Polycarbonate Poly" },
+          {
+            "label": "Housing Type",
+            "value": "Thick Polycarbonate Poly"
+          },
           {
             "label": "Internal Desk Matrix",
             "value": "Solid Walnut Facing Veneer"
@@ -384,7 +498,10 @@
   },
   "stats": {
     "eyebrow": "By the numbers",
-    "heading": ["Proof in the work,", "not the words."],
+    "heading": [
+      "Proof in the work,",
+      "not the words."
+    ],
     "labels": {
       "projects": "Products shipped",
       "years": "Years building",
@@ -395,7 +512,11 @@
   "footer": {
     "brand": "Youssef",
     "watermark": "YOUSSEF",
-    "cta": ["Have a project", "in mind?", "Let's get to work."],
+    "cta": [
+      "Have a project",
+      "in mind?",
+      "Let's get to work."
+    ],
     "ctaButton": "Start a project",
     "tagline": "An independent developer building products, interfaces, and the systems that connect them.",
     "columns": {

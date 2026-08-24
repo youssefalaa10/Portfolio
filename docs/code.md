@@ -187,6 +187,39 @@ system, and each should be obvious from context (`max-w-[18ch]`,
 
 ## 6. Typography
 
+### The scale is fluid, and it opts out of the rem grid
+
+**This is the one place where sizes are not in rem, and the reason matters.**
+
+The adaptive grid (§8) sets the root font-size from the viewport. At a 1512px
+laptop the root lands at 12.6px, so a nominal `0.875rem` body ended up rendering
+at **11px** — proportionally correct and far too small to read. Every text size is
+therefore declared in `globals.css` as a px-based `clamp()`:
+
+```
+--text-sm:   clamp(15px, 0.62vw + 10.6px, 17.5px)
+--text-4xl:  clamp(35px, 3.3vw + 18px,  56px)
+```
+
+Each size has a readable floor, grows with the viewport, and stops at a sane
+ceiling. **Spacing stays on the rem grid**, so the layout is still proportional —
+only type is decoupled.
+
+Hierarchy is maintained by ratio, not by enlarging everything equally: the gap
+between body (`text-sm`) and a section heading (`text-4xl`) is wider than it was
+before. Line heights are paired to each size via `--text-*--line-height`.
+
+`--text-watermark` stays in rem. It is a graphic, not text, and it should scale
+with the layout.
+
+Two consequences to remember when editing:
+
+- Never add a `text-[13px]`-style literal. Use a scale step; add one if none fits.
+- Fixed-width containers sized in rem no longer track their text. If a label
+  starts clipping, widen the container rather than shrinking the type.
+
+### Faces
+
 - **Onest** (latin) and **IBM Plex Sans Arabic** (arabic), both via
   `next/font/google`, which self-hosts them at build time — no runtime request to
   Google, no layout shift, no `preconnect` needed.
@@ -661,3 +694,58 @@ A note on verifying reveals with a headless browser: `scroll-behavior: smooth`
 swallows rapid programmatic `scrollTo` calls, so in-view reveals never fire and
 whole sections look broken. Set `scrollBehavior = 'auto'` and use
 `behavior: 'instant'` before sweeping the page.
+
+---
+
+## 23. The phone showcase
+
+`features/showcase/` is the device that bridges the hero and the section below it.
+
+### What it is, and is not
+
+A **decorative illustration of mobile development** — a Flutter mark and a few
+abstract interface shapes. It is deliberately *not* a screenshot of any real app;
+using or recovering screens from the project renders was explicitly ruled out.
+
+Because the contents carry no information, the whole screen is `aria-hidden`
+behind a single `sr-only` label describing what it depicts.
+
+### The frame is CSS
+
+Chosen over an SVG frame or a transparent PNG mockup on every axis: it weighs
+nothing, stays crisp at any DPI without a 2x asset, scales through
+`aspect-ratio` plus a percentage width instead of needing per-breakpoint files,
+reads the project's colour tokens so it cannot drift from the palette, and raises
+no licensing or watermark question.
+
+Everything inside is sized in **percentages of the frame**, so the device scales
+as one object.
+
+### The bridge
+
+The section is pulled up with a negative margin (`-mt-24 sm:-mt-32 lg:-mt-40`) so
+the device's upper third crosses the hero's rounded bottom edge. It works because
+the showcase is a **sibling** of the hero, not a child — the hero's
+`overflow-hidden` cannot clip it.
+
+Annotation labels are held clear of that overlap on purpose. The device may cross
+into the hero; text must not, or it collides with the status bar.
+
+### Motion budget
+
+- **One** scroll subscription (`useScroll`), which Motion backs with a single
+  passive listener. No scroll handlers of our own, anywhere in the project.
+- Only `transform` and `opacity` animate. Nothing here can trigger layout.
+- `y`, `rotate` and `scale` run through **one** low-stiffness spring, so the
+  device settles rather than tracking the wheel — it should feel heavy.
+- Labels and connectors reveal **once** and then hold still. The connector draw
+  animates `pathLength`, a single stroke property.
+- Under reduced motion the device renders settled and the scroll mapping is
+  skipped entirely.
+
+### Responsive
+
+- Labels appear at `lg`, where there is room for a connector; the two marked
+  `secondary` wait for `xl`. Below `lg` they are hidden rather than shrunk.
+- The device is a percentage width with a `max-w`, so it cannot cause horizontal
+  overflow — asserted in the verification sweep.
