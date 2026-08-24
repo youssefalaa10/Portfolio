@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useRef } from "react";
 
-import { Close, Download, LogoMark } from "@/components/ui/icons";
+import { BrandMark, Close, Download } from "@/components/ui/icons";
 import { Shell } from "@/components/ui/shell";
 import { CV_ASSET } from "@/core/config/assets";
 import { PRIMARY_NAV } from "@/core/config/site";
@@ -59,7 +59,7 @@ export function NavMenu({
         >
           <Shell className="flex items-center justify-between py-5 sm:py-6">
             <span className="flex items-center gap-2 text-lg font-semibold">
-              <LogoMark className="text-xl text-accent-from" />
+              <BrandMark className="text-2xl text-white" />
               {copy.brand}
             </span>
 

@@ -3,9 +3,17 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 
-import { ArrowLeft, ArrowRight, LogoMark } from "@/components/ui/icons";
+import { ArrowLeft, ArrowRight, Cpu, Layout, Smartphone } from "@/components/ui/icons";
 import { SPRING } from "@/core/motion/springs";
 import { cn } from "@/core/utils/cn";
+
+/**
+ * One icon per discipline, in the same order as `hero.card.items` in the
+ * message files (product engineering, mobile apps, interface design). A fixed
+ * abstract mark here would say nothing about which slide is showing; these say
+ * exactly that, and all three already exist in the shared icon set.
+ */
+const DISCIPLINE_ICONS = [Cpu, Smartphone, Layout] as const;
 
 export type HeroCardItem = {
   caption: string;
@@ -46,6 +54,7 @@ export function HeroCard({ copy }: HeroCardProps) {
   };
 
   const active = items[index];
+  const ActiveIcon = DISCIPLINE_ICONS[index] ?? DISCIPLINE_ICONS[0];
 
   return (
     <div
@@ -53,8 +62,22 @@ export function HeroCard({ copy }: HeroCardProps) {
       aria-roledescription="carousel"
     >
       <div className="flex gap-2 rounded-control">
-        <div className="grid aspect-square w-24 shrink-0 place-items-center rounded-control bg-ink text-3xl">
-          <LogoMark className="text-accent-from" />
+        <div
+          className="relative grid aspect-square w-24 shrink-0 place-items-center overflow-hidden rounded-control bg-ink text-3xl"
+          aria-hidden
+        >
+          <AnimatePresence initial={false} mode="popLayout">
+            <motion.span
+              key={index}
+              initial={{ opacity: 0, y: direction * SWAP_DISTANCE }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: direction * -SWAP_DISTANCE }}
+              transition={SPRING.carousel}
+              className="grid place-items-center text-accent-from"
+            >
+              <ActiveIcon />
+            </motion.span>
+          </AnimatePresence>
         </div>
 
         <div className="flex flex-1 flex-col justify-between rounded-control bg-surface/70 p-3">

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Youssef Alaa — Independent Developer",
+    "title": "Youssef Alaa - Software Engineer",
     "description": "Youssef Alaa is an independent developer building products, interfaces, and the systems that connect them — bold ideas, shipped with quiet precision.",
     "servicesTitle": "Services // Micro Matrix — Youssef Alaa",
     "servicesDescription": "Engineered development services: Flutter cross-platform mobile apps, high-performance Next.js web systems, and bespoke UI/UX architecture.",
@@ -33,7 +33,6 @@
     ],
     "watermark": "YOUSSEF",
     "portraitAlt": "Portrait of Youssef Alaa",
-    "lensLabel": "Move to reveal",
     "credential": "4 products shipped end to end",
     "ctaPrimary": "Let's Talk",
     "ctaSecondary": "View Work",
@@ -63,7 +62,9 @@
       "availability": "Available for work",
       "location": "Remote-first, worldwide",
       "scroll": "Scroll to explore"
-    }
+    },
+    "linkedinLabel": "Open LinkedIn profile",
+    "mailLabel": "Email Youssef"
   },
   "showcase": {
     "eyebrow": "Mobile development",
@@ -248,19 +249,24 @@
       "timelineHeading": "Journey & Experience",
       "timeline": [
         {
-          "year": "2021 — Present",
-          "role": "Independent Product Developer",
-          "description": "Partnering with founders and agencies across MENA and worldwide to architect and deliver mobile and web products."
+          "year": "Apr 2026 — Present",
+          "role": "Senior Flutter Developer",
+          "description": "Architected a real-time Kitchen Display System for an MPOS environment, built a native Kotlin receipt-printing bridge, and shipped a delivery driver app with GPS tracking and biometric shift verification."
         },
         {
-          "year": "2022 — 2024",
-          "role": "Mobile & Cross-Platform Engineer",
-          "description": "Shipped 4+ full-scale production applications across iOS & Android with Firebase, state machines, and real-time backend integrations."
+          "year": "Oct 2024 — Present",
+          "role": "Flutter Developer (Part-Time)",
+          "description": "Built scalable Flutter applications on Clean Architecture and SOLID principles, integrating REST APIs and third-party SDKs with CI/CD-driven deployments."
         },
         {
-          "year": "2021 — 2022",
-          "role": "Frontend & Interface Developer",
-          "description": "Engineered responsive component libraries, animated interaction systems, and modern web applications."
+          "year": "Nov 2025 — May 2026",
+          "role": "Mid-Senior Flutter Developer",
+          "description": "Delivered core features for an AI-powered marketplace, including real-time chat, push notifications and deep REST API integration for live trading flows."
+        },
+        {
+          "year": "Jan 2025 — Aug 2025",
+          "role": "Google Play Code Instructor (Part-Time)",
+          "description": "Mentored students in Flutter development — architecture, state management and deployment — as part of Google's official code-instructor programme."
         }
       ],
       "skillsHeading": "Core Disciplines",
@@ -293,6 +299,9 @@
       "ctaHeading": "Ready to build something remarkable?",
       "ctaSub": "Let's collaborate on your next mobile app or web platform.",
       "ctaButton": "Start a Conversation"
+    },
+    "hangingCard": {
+      "role": "Senior Flutter Developer"
     }
   },
   "band": [
@@ -305,24 +314,331 @@
     "heading": [
       "Selected Work"
     ],
-    "intro": "Four products, built and shipped end to end. Case studies are on the way.",
+    "intro": "Nineteen products, shipped end to end — fintech to fleet tracking, e-commerce to education, mobile and web alike.",
     "viewAll": "View all work",
     "projects": {
       "bablabab": {
         "title": "Bablabab",
-        "summary": "A door-to-door e-commerce mobile application built with Flutter and Firebase."
+        "summary": "A door-to-door e-commerce mobile application built with Flutter and Firebase.",
+        "categoryLabel": "E-commerce",
+        "overview": "Bablabab is a door-to-door marketplace built for everyday errands — browsing, ordering and delivery live in one Flutter app, backed by Firebase for auth, catalogue data and order state.",
+        "features": [
+          "Category-led product browsing and search",
+          "Cart, checkout and order tracking in one flow",
+          "Push notifications for order status updates",
+          "Firebase-backed accounts and saved addresses"
+        ],
+        "capabilities": [
+          "Real-time order and delivery status sync",
+          "Role-aware flows for customers and drivers",
+          "Offline-tolerant cart and checkout state"
+        ]
       },
       "bella": {
         "title": "Bella",
-        "summary": "Modern e-commerce platform with a seamless shopping experience across web and mobile."
+        "summary": "Modern e-commerce platform with a seamless shopping experience across web and mobile.",
+        "categoryLabel": "E-commerce",
+        "overview": "Bella brings a boutique's catalogue online with a shopping experience that stays consistent from the storefront to checkout, built with Flutter and backed by Firebase for products, orders and accounts.",
+        "features": [
+          "Browsable catalogue with categories and search",
+          "Cart and a streamlined checkout flow",
+          "Order history and status tracking",
+          "Firebase-backed accounts and saved details"
+        ],
+        "capabilities": [
+          "Consistent shopping experience across every screen",
+          "Firestore-backed product and order data",
+          "Built for iterative catalogue and promotion updates"
+        ]
       },
       "kidzoo": {
         "title": "Kidzoo",
-        "summary": "Interactive educational platform for children with a gamified learning experience."
+        "summary": "Interactive educational platform for children with a gamified learning experience.",
+        "categoryLabel": "Education",
+        "overview": "Kidzoo turns early learning into a game — matching, sound and colour built with Flutter Flame so animals, letters and numbers stay playful, with Flutter TTS so every prompt is heard as well as seen.",
+        "features": [
+          "Flutter Flame-powered matching mini-games",
+          "Text-to-speech prompts for pre-readers",
+          "Bright, child-safe UI with large touch targets",
+          "Progress and score tracking per session"
+        ],
+        "capabilities": [
+          "Age-appropriate content pacing by role",
+          "Offline-friendly gameplay for uninterrupted sessions",
+          "Sound design tuned for a young audience"
+        ]
       },
       "montazah": {
         "title": "Montazah",
-        "summary": "An app for a venue and cafe space offering a relaxing lounge experience, built with Flutter."
+        "summary": "An app for a venue and cafe space offering a relaxing lounge experience, built with Flutter.",
+        "categoryLabel": "Lifestyle",
+        "overview": "Montazah is the booking companion for a venue-and-café space — a calm, Flutter-built app that turns finding a table or reserving a lounge session into a couple of taps.",
+        "features": [
+          "Space and session browsing with availability",
+          "Streamlined booking and confirmation flow",
+          "Venue details, hours and lounge information",
+          "Clean, mobile-first Flutter interface"
+        ],
+        "capabilities": [
+          "Built for fast, low-friction reservations",
+          "Consistent visual language across every screen",
+          "Designed to scale to more venues and sessions"
+        ]
+      },
+      "services27": {
+        "title": "27Services",
+        "summary": "A multilingual services and grocery ordering app, built with Flutter and Firebase.",
+        "categoryLabel": "Services & Grocery",
+        "overview": "27Services pairs a general services marketplace with grocery ordering in one Flutter app — Firebase auth, Firestore data and Google Maps location, delivered in a fully multilingual interface with its own admin dashboard.",
+        "features": [
+          "Service requests alongside grocery ordering",
+          "Google and Firebase authentication",
+          "Google Maps-based location and delivery",
+          "Multilingual UI for a broader audience"
+        ],
+        "capabilities": [
+          "Firestore-backed catalogue and request data",
+          "A dedicated admin dashboard for operations",
+          "Two product lines running from one codebase"
+        ]
+      },
+      "hessah": {
+        "title": "Hessah",
+        "summary": "An education platform connecting instructors and students, built with Flutter and Firebase.",
+        "categoryLabel": "Education",
+        "overview": "Hessah connects instructors and students around real courses — built with Flutter and Firebase so teaching, enrolling and tracking progress all live in a single, focused app.",
+        "features": [
+          "Instructor-authored courses and lessons",
+          "Student enrolment and progress tracking",
+          "Firebase-backed accounts and content",
+          "Clean, course-first navigation"
+        ],
+        "capabilities": [
+          "Separate instructor and student experiences",
+          "Cloud-synced course and progress data",
+          "Built to scale to more instructors and cohorts"
+        ]
+      },
+      "hola": {
+        "title": "Hola Academy",
+        "summary": "A swimming academy app for booking and managing sessions, built with Flutter and Firebase.",
+        "categoryLabel": "Sports & Bookings",
+        "overview": "Hola Academy is the booking and management app for a swimming club — trainees check in with QR codes, coaches track sessions, and admins run the whole club, all from one Flutter and Firebase app.",
+        "features": [
+          "QR check-in for swimming sessions",
+          "Session scheduling and booking",
+          "Push notifications for reminders and updates",
+          "Role-based views for trainee, coach and admin"
+        ],
+        "capabilities": [
+          "Firebase-backed roles, ratings and analytics",
+          "Real-time schedule and attendance data",
+          "Built to run a full club's day-to-day operations"
+        ]
+      },
+      "ogg": {
+        "title": "OGG Tech",
+        "summary": "A modern tech company website, built with Next.js and deployed live.",
+        "categoryLabel": "Technology",
+        "overview": "A modern marketing site for a tech company, built with Next.js and shipped live — fast, accessible pages that introduce the company and its work without any of the usual template feel.",
+        "features": [
+          "Fast, SEO-friendly Next.js pages",
+          "Responsive layout across every device",
+          "Company and product storytelling sections",
+          "Deployed and live in production"
+        ],
+        "capabilities": [
+          "Server-rendered pages for strong load performance",
+          "Built for easy content and section updates",
+          "Clean, modern visual identity"
+        ]
+      },
+      "purefit": {
+        "title": "PureFit",
+        "summary": "A fitness app with Gemini AI-powered personalised coaching and step tracking.",
+        "categoryLabel": "Health & Fitness",
+        "overview": "PureFit turns a Gemini AI model into a personal coach — personalised workout plans, step tracking and offline progress storage, all in a Flutter app built for daily use.",
+        "features": [
+          "Gemini AI-powered personalised coaching",
+          "Step and pedometer-based activity tracking",
+          "Custom workout plans and routines",
+          "Offline progress storage with Sqflite"
+        ],
+        "capabilities": [
+          "On-device data persistence for offline reliability",
+          "AI-generated guidance tailored to the user",
+          "Built for daily, low-friction check-ins"
+        ]
+      },
+      "teacherProgress": {
+        "title": "Teacher Progress",
+        "summary": "A teacher performance tracking platform, live on Google Play and the App Store.",
+        "categoryLabel": "Education",
+        "overview": "Teacher Progress gives schools a single place to track teacher performance — KPI tracking, evaluations and evidence management, backed by Firebase and shipped to both app stores.",
+        "features": [
+          "KPI tracking across teaching staff",
+          "Evaluation workflows with evidence management",
+          "PDF report generation",
+          "Firebase-powered cloud synchronisation"
+        ],
+        "capabilities": [
+          "Cloud-synced evaluation data across devices",
+          "Exportable, shareable PDF reports",
+          "Live on Google Play and the App Store"
+        ]
+      },
+      "toxelpay": {
+        "title": "Toxel Pay",
+        "summary": "A finance management app covering expenses, subscriptions, transfers and bills.",
+        "categoryLabel": "FinTech",
+        "overview": "Toxel Pay puts every recurring payment in one place — expenses, subscriptions, transfers, bills, insurance and telecom, tracked from a single Flutter app with an emphasis on secure local storage.",
+        "features": [
+          "Expense and subscription tracking",
+          "Bill, insurance and telecom payments in one view",
+          "Balance and transfer management",
+          "Encrypted local data storage"
+        ],
+        "capabilities": [
+          "Secure architecture with encrypted local storage",
+          "Clean, predictable state management",
+          "Built for daily financial check-ins"
+        ]
+      },
+      "trucker": {
+        "title": "Trucker",
+        "summary": "A fleet and logistics tracking app with live GPS and WebSocket dashboards.",
+        "categoryLabel": "Logistics & Fleet",
+        "overview": "Trucker is fleet visibility in real time — live GPS tracking, geofencing and route history feeding a WebSocket-powered monitoring dashboard for logistics teams.",
+        "features": [
+          "Live GPS tracking per vehicle",
+          "Geofencing and route history",
+          "WebSocket-powered live dashboards",
+          "Google Maps-based visualisation"
+        ],
+        "capabilities": [
+          "Real-time monitoring over persistent WebSocket connections",
+          "Historical route and geofence data for audits",
+          "Built for fleet operators, not just drivers"
+        ]
+      },
+      "qutof": {
+        "title": "Qutof",
+        "summary": "A fresh produce e-commerce app with a role-based admin companion, built with Flutter and Firebase.",
+        "categoryLabel": "E-commerce",
+        "overview": "Qutof brings fresh fruit and vegetables online — ordering, cart management and delivery tracking in a Flutter app, with a separate role-based admin app running stock and fulfilment behind it.",
+        "features": [
+          "Fresh produce browsing and ordering",
+          "Cart management and an order queue",
+          "Delivery tracking and push notifications",
+          "A dedicated role-based admin app"
+        ],
+        "capabilities": [
+          "Cloud Functions-backed stock and order management",
+          "Firebase-powered real-time order queue",
+          "Two apps, one consistent product"
+        ]
+      },
+      "talabak": {
+        "title": "Talabak Men Barra",
+        "summary": "A cross-border delivery app for ordering items from abroad, built with Flutter and Firebase.",
+        "categoryLabel": "Delivery",
+        "overview": "Talabak Men Barra lets people order items from abroad and have them delivered — a Flutter and Firebase app built around cross-border requests instead of a fixed catalogue.",
+        "features": [
+          "Cross-border item requests",
+          "Order status and delivery tracking",
+          "Firebase-backed accounts and requests",
+          "Straightforward, request-first flow"
+        ],
+        "capabilities": [
+          "Built around open-ended requests, not a fixed catalogue",
+          "Firebase-backed real-time status updates",
+          "Designed for a cross-border delivery workflow"
+        ]
+      },
+      "bakery": {
+        "title": "Artisan Bakery",
+        "summary": "A bakery's online storefront with ordering and delivery tracking, built with React and Node.js.",
+        "categoryLabel": "Online Ordering",
+        "overview": "A bakery's online storefront, built with React and Node.js — browsing, ordering and delivery tracking wrapped in a warm, product-first design.",
+        "features": [
+          "Product catalogue with online ordering",
+          "Delivery tracking for placed orders",
+          "Responsive, storefront-first design",
+          "React front end on a Node.js back end"
+        ],
+        "capabilities": [
+          "Built for a growing product catalogue",
+          "Order data handled through a dedicated backend",
+          "Designed to feel like a bakery, not a template"
+        ]
+      },
+      "gatesOfEgypt": {
+        "title": "Gates of Egypt",
+        "summary": "A React-built showcase of Egypt's tourist attractions and landmarks.",
+        "categoryLabel": "Tourism",
+        "overview": "Gates of Egypt is a React-built showcase of the country's tourist attractions and landmarks — a fast, image-led site made for browsing and discovery.",
+        "features": [
+          "Landmark and attraction showcases",
+          "Image-led, discovery-first browsing",
+          "Responsive layout for every device",
+          "Built with React for a fast, app-like feel"
+        ],
+        "capabilities": [
+          "Structured for easy addition of new landmarks",
+          "Optimised for an image-heavy browsing experience",
+          "Clean, content-first information architecture"
+        ]
+      },
+      "rawaed": {
+        "title": "Rawaed",
+        "summary": "A business solutions website, built with React and deployed on Vercel.",
+        "categoryLabel": "Business Solutions",
+        "overview": "Rawaed is a business solutions website built with React and deployed on Vercel — clear, professional pages that introduce services and route interest to contact.",
+        "features": [
+          "Service and offering breakdowns",
+          "Clear calls to action toward contact",
+          "Responsive, professional layout",
+          "Deployed on Vercel"
+        ],
+        "capabilities": [
+          "Fast, edge-deployed hosting via Vercel",
+          "Built for straightforward content updates",
+          "Consistent, professional visual identity"
+        ]
+      },
+      "sala": {
+        "title": "Sala",
+        "summary": "A web platform for sending gifts and connecting people with the people they care about.",
+        "categoryLabel": "Gifting Platform",
+        "overview": "Sala is a React-built platform for sending gifts and connecting people with the people they care about — browsing, selecting and sending, without the usual e-commerce friction.",
+        "features": [
+          "Gift browsing and selection",
+          "A sending flow built around the recipient",
+          "Responsive, React-powered front end",
+          "Warm, occasion-first design language"
+        ],
+        "capabilities": [
+          "Designed around relationships, not just products",
+          "Built for quick, low-friction gifting flows",
+          "Clean information architecture for browsing by occasion"
+        ]
+      },
+      "instapost": {
+        "title": "InstaPost",
+        "summary": "A personal build of a social feed application, built with React.",
+        "categoryLabel": "Social Platform",
+        "overview": "InstaPost is a personal build of a social feed application — posts, friends, trends and reactions in a React interface modelled on the feeds people use every day.",
+        "features": [
+          "A scrollable feed of posts with media",
+          "Friends list and profile pages",
+          "Trending topics sidebar",
+          "Likes and comments on posts"
+        ],
+        "capabilities": [
+          "Built as a from-scratch social feed exercise",
+          "Familiar, feed-first interaction patterns",
+          "React front end covering the full social loop"
+        ]
       }
     },
     "spotlight": {
@@ -334,6 +650,18 @@
       "next": "Next project",
       "select": "Show project {index}",
       "all": "Every project"
+    },
+    "viewProject": "View case study",
+    "detail": {
+      "overviewLabel": "Overview",
+      "featuresLabel": "Main features",
+      "capabilitiesLabel": "Key capabilities",
+      "techStackLabel": "Tech stack",
+      "galleryLabel": "Screens",
+      "back": "Back to all work",
+      "previousImage": "Previous image",
+      "nextImage": "Next image",
+      "closePreview": "Close preview"
     }
   },
   "services": {
@@ -525,8 +853,7 @@
       "social": "Social",
       "downloadCv": "Download CV"
     },
-    "legal": "© {year} Youssef Alaa. All rights reserved.",
-    "builtWith": "Built with Next.js"
+    "legal": "© {year} Youssef Alaa. All rights reserved."
   },
   "request": {
     "eyebrow": "Start a project",
@@ -547,18 +874,28 @@
       }
     },
     "note": "I reply within one business day.",
-    "submit": "Send request",
-    "submitting": "Sending…",
     "success": {
       "heading": "Request received",
       "body": "Thanks for reaching out — I'll get back to you within one business day.",
       "close": "Close"
-    }
+    },
+    "sendWhatsapp": "Send via WhatsApp",
+    "sendEmail": "Send via email",
+    "messageTemplate": "New project inquiry from {name} ({email}):\n\n{project}",
+    "emailSubject": "New project inquiry"
   },
   "notFound": {
     "eyebrow": "404",
     "heading": "This page isn't here yet.",
     "body": "The rest of the portfolio is still being built. Head back to the start in the meantime.",
     "cta": "Back home"
+  },
+  "whatsapp": {
+    "floatingLabel": "Chat on WhatsApp",
+    "ctaHeading": "Want an app like this?",
+    "ctaBody": "Tell me about your idea on WhatsApp and I'll get back to you the same day.",
+    "ctaButton": "Chat on WhatsApp",
+    "messageTemplate": "Hi, I saw {project} on your portfolio and I'm interested in building something similar.",
+    "messageGeneric": "Hi Youssef, I'd like to talk about building an app or website with you."
   }
 }

@@ -2,6 +2,7 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { Shell } from "@/components/ui/shell";
 import { LineReveal } from "@/core/components/line-reveal";
 import { Reveal } from "@/core/components/reveal";
+import type { Locale } from "@/core/i18n/config";
 import type { Dictionary } from "@/core/i18n/dictionaries";
 import { STAGGER } from "@/core/motion/springs";
 
@@ -9,11 +10,12 @@ import { ProjectGrid } from "./project-grid";
 import { ProjectSpotlight } from "./project-spotlight";
 
 type WorkPageProps = {
+  locale: Locale;
   copy: Dictionary["work"];
 };
 
 /** The dedicated work index. Shares `ProjectGrid` with the home page section. */
-export function WorkPage({ copy }: WorkPageProps) {
+export function WorkPage({ locale, copy }: WorkPageProps) {
   return (
     <Shell className="flex flex-col gap-8 py-28 lg:py-36">
       <Reveal preset="fade-up" distance={0.625} trigger="mount">
@@ -41,11 +43,13 @@ export function WorkPage({ copy }: WorkPageProps) {
 
       <Reveal trigger="mount" delay={0.34} className="mt-2">
         <ProjectSpotlight
+          locale={locale}
           copy={copy.projects}
           labels={{
             previous: copy.spotlight.previous,
             next: copy.spotlight.next,
             select: copy.spotlight.select,
+            view: copy.viewProject,
           }}
         />
       </Reveal>
@@ -54,7 +58,7 @@ export function WorkPage({ copy }: WorkPageProps) {
         <Reveal preset="fade-up" distance={0.625}>
           <Eyebrow>{copy.spotlight.all}</Eyebrow>
         </Reveal>
-        <ProjectGrid copy={copy.projects} />
+        <ProjectGrid locale={locale} copy={copy.projects} viewLabel={copy.viewProject} />
       </div>
     </Shell>
   );

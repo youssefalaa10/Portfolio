@@ -18,23 +18,18 @@ import {
   Smartphone,
   Terminal,
 } from "@/components/ui/icons";
-import { Eyebrow } from "@/components/ui/eyebrow";
-import { PillButton } from "@/components/ui/pill-button";
 import { Shell } from "@/components/ui/shell";
 import { SERVICES_VIDEO } from "@/core/config/assets";
-import type { Locale } from "@/core/i18n/config";
 import type { Dictionary } from "@/core/i18n/dictionaries";
 import { SPRING } from "@/core/motion/springs";
 import { fadeUp, ONCE_IN_VIEW } from "@/core/motion/variants";
 import { useRequestModal } from "@/features/contact/components/request-modal-provider";
-import { div } from "motion/react-client";
 
 type ServicesPageProps = {
-  locale: Locale;
   copy: Dictionary["services"];
 };
 
-export function ServicesPage({ locale, copy }: ServicesPageProps) {
+export function ServicesPage({ copy }: ServicesPageProps) {
   const { open } = useRequestModal();
   const [subscribed, setSubscribed] = useState(false);
   const [emailInput, setEmailInput] = useState("");
@@ -178,7 +173,7 @@ export function ServicesPage({ locale, copy }: ServicesPageProps) {
             loop
             muted
             playsInline
-            className="h-full w-full object-cover opacity-[0.14] mix-blend-multiply transition-transform duration-100 ease-out"
+            className="h-full w-full object-cover opacity-[0.4] mix-blend-multiply transition-transform duration-500 ease-out"
             style={{ willChange: "transform" }}
           >
             <source src={SERVICES_VIDEO.src} type={SERVICES_VIDEO.type} />
@@ -271,7 +266,7 @@ export function ServicesPage({ locale, copy }: ServicesPageProps) {
 
           <div className="grid gap-6 md:grid-cols-2">
             {page.nodes.items.map((node, index) => (
-              <><motion.div
+              <motion.div
                 key={node.id}
                 variants={fadeUp(1.5)}
                 initial="hidden"
@@ -323,7 +318,7 @@ export function ServicesPage({ locale, copy }: ServicesPageProps) {
                     <ArrowUpRight className="text-sm rtl:-scale-x-100" />
                   </button>
                 </div>
-              </motion.div></>
+              </motion.div>
             ))}
           </div>
         </Shell>

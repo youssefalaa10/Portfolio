@@ -5,7 +5,9 @@ import Image from "next/image";
 import { useState } from "react";
 
 import { ArrowLeft, ArrowRight } from "@/components/ui/icons";
+import { PillButton } from "@/components/ui/pill-button";
 import { TagChip } from "@/components/ui/tag-chip";
+import { localeHref, type Locale } from "@/core/i18n/config";
 import { SPRING } from "@/core/motion/springs";
 import { cn } from "@/core/utils/cn";
 
@@ -14,8 +16,9 @@ import { PROJECTS } from "../data/projects";
 type ProjectCopy = { title: string; summary: string };
 
 type ProjectSpotlightProps = {
+  locale: Locale;
   copy: Record<string, ProjectCopy>;
-  labels: { previous: string; next: string; select: string };
+  labels: { previous: string; next: string; select: string; view: string };
   className?: string;
 };
 
@@ -33,6 +36,7 @@ type ProjectSpotlightProps = {
  * exactly one cover image is ever in the DOM.
  */
 export function ProjectSpotlight({
+  locale,
   copy,
   labels,
   className,
@@ -105,6 +109,16 @@ export function ProjectSpotlight({
                   ))}
                 </ul>
               ) : null}
+
+              <div>
+                <PillButton
+                  href={localeHref(locale, `/work/${project.slug}`)}
+                  variant="dark"
+                  arrow="up-right"
+                >
+                  {labels.view}
+                </PillButton>
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>

@@ -1,10 +1,10 @@
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { Star } from "@/components/ui/icons";
+import { LinkedIn, Mail, Star } from "@/components/ui/icons";
 import { PillButton } from "@/components/ui/pill-button";
 import { Shell } from "@/components/ui/shell";
 import { LineReveal } from "@/core/components/line-reveal";
 import { Reveal } from "@/core/components/reveal";
-import { SECTION_ID } from "@/core/config/site";
+import { CONTACT_HREF, LINKEDIN_URL, SECTION_ID } from "@/core/config/site";
 import type { Dictionary } from "@/core/i18n/dictionaries";
 import { localeHref, type Locale } from "@/core/i18n/config";
 import { HERO_DELAY, STAGGER } from "@/core/motion/springs";
@@ -38,7 +38,6 @@ export function Hero({ locale, copy }: HeroProps) {
     >
       <HeroVisual
         portraitAlt={copy.portraitAlt}
-        lensLabel={copy.lensLabel}
         watermark={copy.watermark}
       />
 
@@ -98,9 +97,32 @@ export function Hero({ locale, copy }: HeroProps) {
             The toolchain used to be listed here too; it moved to the marquee
             below, where it has room to be read instead of crowding dark type
             onto a dark suit. */}
-        <div className="flex flex-col items-start gap-8 lg:col-span-6 lg:items-end lg:justify-end">
+        <div className="flex flex-col items-start gap-5 lg:col-span-6 lg:items-end lg:justify-end">
           <Reveal preset="scale-in" trigger="mount" delay={HERO_DELAY.card}>
             <HeroCard copy={copy.card} />
+          </Reveal>
+
+          <Reveal
+            trigger="mount"
+            delay={HERO_DELAY.card + 0.1}
+            className="flex items-center gap-2.5"
+          >
+            <a
+              href={LINKEDIN_URL}
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label={copy.linkedinLabel}
+              className="grid size-10 place-items-center rounded-pill bg-white/70 text-foreground/70 ring-1 ring-line/70 backdrop-blur-md transition-all hover:scale-105 hover:text-foreground"
+            >
+              <LinkedIn />
+            </a>
+            <a
+              href={CONTACT_HREF}
+              aria-label={copy.mailLabel}
+              className="grid size-10 place-items-center rounded-pill bg-white/70 text-foreground/70 ring-1 ring-line/70 backdrop-blur-md transition-all hover:scale-105 hover:text-foreground"
+            >
+              <Mail />
+            </a>
           </Reveal>
         </div>
       </Shell>

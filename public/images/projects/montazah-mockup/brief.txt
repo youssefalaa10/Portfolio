@@ -1,1 +1,0 @@
-An app for a venue/cafe space offering a relaxing lounge experience, built with Flutter.

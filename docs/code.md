@@ -23,10 +23,13 @@ accent, a rem-proportional grid, and spring-driven motion.
 
 **Build status.** The home page is complete — hero, about, band, marquee,
 selected work, services, stats, footer — plus the header with its overlay menu,
-the request dialog, the `/work` index, and the locale routing shell. What is
-deliberately not built yet is listed in §21 Roadmap, and the code says so where
-it matters: there are no placeholder components standing in for real ones, and
-nothing links to a route that does not exist.
+the request dialog, the `/work` index, the `/work/[slug]` case-study route for
+all 19 shipped projects, and the locale routing shell. A floating WhatsApp
+button and a project-aware WhatsApp CTA are wired site-wide, reusing the same
+contact number as everything else. What is deliberately not built yet is listed
+in §21 Roadmap, and the code says so where it matters: there are no placeholder
+components standing in for real ones, and nothing links to a route that does
+not exist.
 
 ---
 
@@ -81,16 +84,28 @@ portfolio/
     ├── app/                     ← routing only
     │   ├── globals.css          ← design tokens + base + utilities
     │   └── [locale]/
-    │       ├── layout.tsx       ← THE root layout
+    │       ├── layout.tsx       ← THE root layout, mounts the floating WhatsApp button
     │       ├── page.tsx
     │       ├── not-found.tsx
-    │       └── work/page.tsx
+    │       └── work/
+    │           ├── page.tsx
+    │           └── [slug]/page.tsx   ← case-study route, all 19 projects
     ├── components/ui/           ← reusable primitives
+    ├── components/lightswind/   ← bespoke HangingIdCard + ScrollTimeline (§13)
     ├── core/                    ← app-wide infrastructure
     │   ├── components/  config/  hooks/  i18n/  motion/  utils/
     └── features/
-        ├── about/  contact/  footer/  hero/  home/
-        ├── navigation/  services/  stats/  work/
+        ├── about/
+        │   └── data/timeline.ts      ← proper-noun company names for ScrollTimeline
+        ├── contact/
+        │   └── components/whatsapp-cta.tsx, whatsapp-floating-button.tsx
+        ├── footer/  hero/  home/  navigation/  services/  stats/
+        └── work/
+            ├── data/projects.ts      ← all 19 projects
+            └── components/           ← card, grid, spotlight, and the
+                                         detail-route pieces (hero, gallery,
+                                         overview, features, capabilities,
+                                         work-detail-page)
 ```
 
 ### Responsibility boundaries
@@ -121,26 +136,50 @@ return <HomePage locale={locale} dictionary={dictionary} />;
 
 ## 4. Routing
 
-Every route lives under `/{locale}`. `src/proxy.ts` redirects a bare path to the
-best locale from `Accept-Language`, falling back to `en`.
+Every page still lives under `app/[locale]/...`, but the visible URL never
+carries a locale segment. **This is a deliberate deviation from this contract's
+original locale-prefixed routing**, made per the process in the header of this
+document: the user asked for URLs with no `/en`/`/ar` in them, so the app root
+segment stays `[locale]` internally (Next 16 requires the root layout's segment
+to be where `lang`/`dir` are set — see §2), while `src/proxy.ts` rewrites a
+bare, prefix-free request onto `/{locale}/...` before Next's router ever sees
+it. Language is a `NEXT_LOCALE` cookie, resolved on first visit from
+`Accept-Language` (falling back to `en`) and set again whenever
+`LocaleSwitcher` is used — never encoded in the path. A request that still
+names a locale explicitly (an old bookmark, a crawler) is 301-redirected to the
+prefix-free equivalent, so exactly one URL ever serves a given page.
 
-| Route                                | State                                 |
-| ------------------------------------ | ------------------------------------- |
-| `/en`, `/ar`                         | built — the full home page            |
-| `/en/work`, `/ar/work`               | built (index; factual copy only)      |
-| `/{locale}/work/[slug]`              | not built — §21                       |
-| `/{locale}/{about,services,contact}` | **not planned as routes** — see below |
+| Route                    | State                                 |
+| ------------------------ | -------------------------------------- |
+| `/`                       | built — the full home page            |
+| `/work`                   | built (index; factual copy only)      |
+| `/work/[slug]`             | built — case study per project (19)   |
+| `/{about,services,contact}` | **not planned as routes** — see below |
 
 About and Services are **sections of the home page**, reached by hash anchor;
 Contact opens the request dialog. That is sanctioned section navigation, not faked
 multi-page routing — `/work` is a real route with its own page and metadata. What
 each nav item does is declared once, as `kind` on `NavItem` in
 `core/config/site.ts`, and `features/navigation/components/nav-link.tsx` is the
-only place that reads it. Anchor hrefs are built locale-first (`/en#services`) so
-they still resolve from `/work`.
+only place that reads it. Anchor hrefs resolve from `/work` the same way they did
+under the old prefixed scheme (`#services`), just without a locale segment to
+carry along.
 
-Both locales are prerendered via `generateStaticParams`, and `dynamicParams =
-false` makes any other locale a 404 rather than a silently generated page.
+Both locales are still prerendered via `generateStaticParams` (Next needs a
+static `[locale]` param set for the internal route to build), and
+`dynamicParams = false` makes any other locale a 404 rather than a silently
+generated page — a reader just never sees `[locale]` in the address bar to
+reach one directly.
+
+**SEO trade-off, accepted knowingly:** a crawler carries no cookie, so it only
+ever sees default-locale (`en`) content at each URL. There is no
+`alternates.languages` entry in `generateMetadata` any more (see
+`app/[locale]/layout.tsx`) because both locales now share one URL — a
+`hreflang` pointing every language at the same href is not what that
+annotation means, so it was removed rather than left misleading. If Arabic
+discoverability in search results becomes a requirement, that calls for a
+second, explicit `/ar` route tree (or reverting this section) — not a patch to
+the current single-URL rewrite.
 
 `app/` is never renamed or replaced. `features/` is not a substitute for the App
 Router.
@@ -182,6 +221,14 @@ animates the _opacity of a `bg-surface` layer_ rather than interpolating an
 Arbitrary values are allowed only for genuine one-offs that are not part of a
 system, and each should be obvious from context (`max-w-[18ch]`,
 `leading-[0.98]`, `tracking-[-0.02em]`).
+
+**Documented exception: WhatsApp brand green.** `WhatsAppCta` and
+`WhatsAppFloatingButton` use `bg-[#25D366]` directly rather than a token.
+WhatsApp's brand colour is not part of this site's palette and never should be —
+tokenising it would either pollute `@theme` with a colour used in exactly two
+places, or force those two places to fake a different green through an existing
+token. It is a recognised third-party mark, not a design decision, so it is
+named here instead of hidden behind a token that implies otherwise.
 
 ---
 
@@ -240,11 +287,12 @@ Two consequences to remember when editing:
 
 Locales: `en` (ltr), `ar` (rtl). Contract lives in `src/core/i18n/config.ts`.
 
-**No i18n library.** What this project needs is locale-prefixed routes, a typed
-message bundle, and `Intl` where relevant — all of which the platform and the App
-Router already provide. `next-intl` would add a dependency, a provider, and a
-config file to replace ~120 lines. Revisit if ICU message formatting,
-pluralisation rules, or per-namespace lazy loading become real requirements.
+**No i18n library.** What this project needs is a locale-aware route (internally
+prefixed, see §4 for why the visible URL is not), a typed message bundle, and
+`Intl` where relevant — all of which the platform and the App Router already
+provide. `next-intl` would add a dependency, a provider, and a config file to
+replace ~120 lines. Revisit if ICU message formatting, pluralisation rules, or
+per-namespace lazy loading become real requirements.
 
 **Rules**
 
@@ -438,9 +486,14 @@ a cut-out, the `source-in` stamp clips the trail to his silhouette for free.
 `PORTRAIT_OBJECT_POSITION_CLASS` (the CSS on the `<Image>`). They live adjacent in
 `constants.ts` for exactly this reason.
 
-`CursorLens` is a spring-tracked ring that appears only while the pointer is over
-the portrait, so the effect is discoverable. It is ink-on-light because it has to
-stay legible over both the pale backdrop and the near-black suit.
+**No discoverability affordance is rendered on top of the portrait.** An earlier
+version paired the trail with `CursorLens`, a spring-tracked ring plus a "Move to
+reveal" label that appeared while the pointer was over the portrait. It was
+removed — the reveal is now a quiet surprise for anyone who happens to hover
+rather than a hinted interaction, which reads calmer next to the rest of the
+hero. If a discoverability cue is reintroduced later, it should not be a second
+component: extend the canvas layer itself rather than layering another element
+over the portrait.
 
 The whole effect gates on `(hover: hover) and (pointer: fine)` — not a width
 breakpoint, because a large tablet is still touch — and on
@@ -460,6 +513,14 @@ context requests `portrait.webp` at all.
 - **The CV is a download, so it must be a plain `<a download>`.** Routing a file
   through the client router navigates to it instead of saving it — `PillButton`
   switches to an anchor whenever `download` is set, for this reason.
+- **Background `<video>` sources must be H.264 (`avc1`), not HEVC/H.265.**
+  `public/enter_vd.mp4` (the Services hero's ambient loop) shipped HEVC-encoded
+  at one point — it silently fails to play in Chrome and Firefox on every
+  platform that lacks a paid/OEM HEVC extension, which is most of the traffic
+  this site gets, so the loop rendered as nothing rather than as a background
+  effect. Re-encode with `ffmpeg -an -c:v libx264 -pix_fmt yuv420p` (a `crf`
+  around 24–28 is plenty for a decorative, blended-down loop) before adding any
+  future background video.
 
 ---
 
@@ -467,13 +528,14 @@ context requests `portrait.webp` at all.
 
 Structured, typed data renders the UI; markup never encodes content.
 
-| Data                                                         | Home                             |
-| ------------------------------------------------------------ | -------------------------------- |
-| Nav items and their `kind`, email, technologies, section ids | `core/config/site.ts`            |
-| Asset descriptors, CV                                        | `core/config/assets.ts`          |
-| Projects                                                     | `features/work/data/projects.ts` |
-| Stat values                                                  | `features/stats/data/stats.ts`   |
-| All copy                                                     | `messages/{en,ar}.json`          |
+| Data                                                         | Home                               |
+| ------------------------------------------------------------ | ----------------------------------- |
+| Nav items and their `kind`, email, WhatsApp number, tech names, section ids | `core/config/site.ts` |
+| Asset descriptors, CV                                        | `core/config/assets.ts`            |
+| Projects                                                     | `features/work/data/projects.ts`   |
+| Timeline company names                                       | `features/about/data/timeline.ts`  |
+| Stat values                                                  | `features/stats/data/stats.ts`     |
+| All copy                                                     | `messages/{en,ar}.json`            |
 
 Projects are keyed by `slug` in both the data file and
 `messages.work.projects`, so adding one is a data change in two files and never a
@@ -483,13 +545,28 @@ cannot drift apart.
 Two stat values are **derived** — project count from `PROJECTS.length`, years from
 `SITE.workingSince` — so they cannot go stale.
 
-Three things are deliberately incomplete rather than invented:
+`Project` carries `cover`, `gallery` (case-study screenshots beyond the cover),
+`tags` (proper-noun tech stack), `category` (`"mobile" | "web"`, used for the
+card's category label and the detail gallery's aspect ratio) and an optional
+`href` for a live store/site link. `cover` and `gallery` are raw `/images/...`
+path strings rather than resolving through `core/config/assets.ts` — a narrow,
+precedented exception to §11 for this one field, because the asset resolver is
+built for a fixed, named set of site assets (hero, CV) and 19 projects × several
+screenshots each would mean 19 one-off entries there for no benefit over the
+`p(slug)` path helper already local to `projects.ts`.
+
+`WHATSAPP_NUMBER` and `whatsappHref()` live in `core/config/site.ts`, next to
+`CONTACT_HREF`, and are the single source every WhatsApp surface — the
+project-aware CTA and the floating button — reads from. Never a second
+hardcoded number.
+
+Two things are deliberately incomplete rather than invented:
 
 - `SOCIAL_LINKS` is empty. A chip linking to `github.com/` is worse than no chip;
   the About and footer blocks hide themselves while the list is empty.
-- `Project` has no `year`, `category`, `role`, `client` or `results`. Those are
-  facts about your work, and they land with the detail route from your notes.
-- Nothing claims a client count, a rating, or a retention figure.
+- `Project` has no `year`, `role`, `client` or `results`. Those are facts about
+  your work that have not been recorded yet; nothing claims a client count, a
+  rating, or a retention figure.
 
 ---
 
@@ -500,7 +577,8 @@ Three things are deliberately incomplete rather than invented:
 
 - **Icons**: `components/ui/icons.tsx` only. Every icon is `1em` and
   `currentColor`, so a call site controls it with `text-*` alone. Pasted `<svg>`
-  markup in a feature component is a forbidden pattern.
+  markup in a feature component is a forbidden pattern. `WhatsApp` was added here
+  for the CTA and floating button, following the same rule.
 - **`PillButton`** is exactly one of three things and the type system says so: a
   link (optionally a download), an action, or a form submit. There is no shape
   where it is ambiguous. Navigation is never a click handler; an action is never a
@@ -508,6 +586,25 @@ Three things are deliberately incomplete rather than invented:
 - **The request dialog is a single shared instance.** `RequestModalProvider` sits
   in the root layout; the header, hero and footer call `useRequestModal().open()`.
   Three copies would mean three pieces of state and three focus traps competing.
+- **`WhatsAppCta`** (`features/contact/components/whatsapp-cta.tsx`) and
+  **`WhatsAppFloatingButton`** (`.../whatsapp-floating-button.tsx`) are the two
+  shared WhatsApp surfaces. `WhatsAppCta` takes an optional `projectName` and
+  fills `messages.whatsapp.messageTemplate`'s `{project}` placeholder, or falls
+  back to `messages.whatsapp.messageGeneric`; both build their `href` through
+  `whatsappHref()` (§12), never a literal `wa.me` URL. `WhatsAppFloatingButton` is
+  mounted once, in `app/[locale]/layout.tsx`, the same singleton reasoning as the
+  request dialog above.
+- **`components/lightswind/hanging-id-card.tsx`** (`HangingIdCard`) and
+  **`.../scroll-timeline.tsx`** (`ScrollTimeline`) power the About page's
+  Profile & Ethos card and journey timeline. Both are hand-built against this
+  project's own `motion`/`SPRING`/`variants` system rather than installed from
+  the `lightswind` npm package: the package is a shadcn-style CLI registry with
+  an ambiguous paid tier gating some components, and installing it would also
+  mean a second animation/styling convention living alongside §9's spring system
+  for exactly two components. Same prop surface as the package (`name`, `role`,
+  `badgeId`, `accentColor`, `ropeLength` for the card; `events`, `title`,
+  `subtitle`, `progressIndicator`, `cardAlignment`, `revealAnimation` for the
+  timeline), zero new dependency.
 - A primitive earns its place by improving reuse, readability, isolation,
   accessibility or maintainability. Do not atomise every visual detail.
 
@@ -656,8 +753,6 @@ Unless a documented technical reason is added to this file first:
 
 ## 21. Roadmap
 
-- **`work/[slug]`.** Fill out the `Project` schema from your notes, then wrap
-  `ProjectCard` in a `<Link>` — the card is already built to become one.
 - **Social links.** Add your handles to `SOCIAL_LINKS`; the About and footer rows
   render themselves.
 - **Intro loader.** `HERO_DELAY` is expressed as an offset, so gating the hero's
@@ -679,7 +774,8 @@ npx next build                          # production build
 
 Then check by hand:
 
-- [ ] `/en` and `/ar` render; `/` redirects
+- [ ] `/` renders in both languages (switch via `LocaleSwitcher`, no URL change);
+      an explicit `/en` or `/ar` redirects to the prefix-free path
 - [ ] LTR and RTL both correct — spacing, arrows, masks, gradients
 - [ ] mobile, tablet, desktop and >1920px compositions
 - [ ] reduced motion: content fully present, no transforms, no reveal canvas

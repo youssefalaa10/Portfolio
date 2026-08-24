@@ -3,8 +3,9 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useId, useRef, useState } from "react";
 
-import { Close, LogoMark } from "@/components/ui/icons";
+import { CheckCircle, Close, Mail, WhatsApp } from "@/components/ui/icons";
 import { PillButton } from "@/components/ui/pill-button";
+import { mailtoHref, whatsappHref } from "@/core/config/site";
 import { useFocusTrap } from "@/core/hooks/use-focus-trap";
 import { useScrollLock } from "@/core/hooks/use-scroll-lock";
 import { SPRING } from "@/core/motion/springs";
@@ -19,8 +20,11 @@ export type RequestModalCopy = {
     project: { label: string; placeholder: string };
   };
   note: string;
-  submit: string;
-  submitting: string;
+  sendWhatsapp: string;
+  sendEmail: string;
+  /** Contains `{name}`, `{email}` and `{project}`, filled from the form. */
+  messageTemplate: string;
+  emailSubject: string;
   success: {
     heading: string;
     body: string;
@@ -43,13 +47,16 @@ const LABEL_CLASS =
 /**
  * Project request dialog.
  *
- * Submission is a local stub — there is no backend, and pretending otherwise
- * would silently drop what someone typed. It shows the success state so the flow
- * is complete and reviewable; wiring a real endpoint is one handler.
+ * There is no backend, so "submit" opens the reader's own WhatsApp or mail
+ * client with the form's contents pre-filled, via whichever of the two buttons
+ * they pick — a real handoff rather than a stub that pretends to send
+ * something and quietly drops it. `event.nativeEvent.submitter` is what tells
+ * the two submit buttons apart; both still go through the form's native
+ * `required` validation before either fires.
  */
 export function RequestModal({ open, onClose, copy }: RequestModalProps) {
   const panelRef = useRef<HTMLDivElement>(null);
-  const [status, setStatus] = useState<"form" | "sending" | "sent">("form");
+  const [status, setStatus] = useState<"form" | "sent">("form");
   const headingId = useId();
 
   useScrollLock(open);
@@ -65,8 +72,31 @@ export function RequestModal({ open, onClose, copy }: RequestModalProps) {
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setStatus("sending");
-    window.setTimeout(() => setStatus("sent"), 600);
+
+    const submitter = (event.nativeEvent as SubmitEvent)
+      .submitter as HTMLButtonElement | null;
+    const channel = submitter?.value === "email" ? "email" : "whatsapp";
+
+    const data = new FormData(event.currentTarget);
+    const name = String(data.get("name") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
+    const project = String(data.get("project") ?? "").trim();
+
+    const message = copy.messageTemplate
+      .replace("{name}", name)
+      .replace("{email}", email)
+      .replace("{project}", project);
+
+    if (channel === "email") {
+      window.location.href = mailtoHref({
+        subject: copy.emailSubject,
+        body: message,
+      });
+    } else {
+      window.open(whatsappHref(message), "_blank", "noopener,noreferrer");
+    }
+
+    setStatus("sent");
   };
 
   return (
@@ -105,7 +135,7 @@ export function RequestModal({ open, onClose, copy }: RequestModalProps) {
             {status === "sent" ? (
               <div className="flex flex-col items-center gap-4 py-8 text-center">
                 <span className="grid size-14 place-items-center rounded-pill bg-ink text-2xl text-accent-from">
-                  <LogoMark />
+                  <CheckCircle />
                 </span>
                 <h2 id={headingId} className="text-2xl font-semibold">
                   {copy.success.heading}
@@ -121,7 +151,10 @@ export function RequestModal({ open, onClose, copy }: RequestModalProps) {
               <>
                 <div className="mb-6 flex flex-col gap-1.5 pe-12">
                   <span className="inline-flex items-center gap-2 text-sm font-medium text-foreground/60">
-                    <span aria-hidden className="size-1.5 rounded-pill bg-accent" />
+                    <span
+                      aria-hidden
+                      className="size-1.5 rounded-pill bg-accent"
+                    />
                     {copy.eyebrow}
                   </span>
                   <h2
@@ -134,7 +167,9 @@ export function RequestModal({ open, onClose, copy }: RequestModalProps) {
 
                 <form className="flex flex-col gap-4" onSubmit={onSubmit}>
                   <label className="flex flex-col gap-2">
-                    <span className={LABEL_CLASS}>{copy.fields.name.label}</span>
+                    <span className={LABEL_CLASS}>
+                      {copy.fields.name.label}
+                    </span>
                     <input
                       type="text"
                       name="name"
@@ -146,7 +181,9 @@ export function RequestModal({ open, onClose, copy }: RequestModalProps) {
                   </label>
 
                   <label className="flex flex-col gap-2">
-                    <span className={LABEL_CLASS}>{copy.fields.email.label}</span>
+                    <span className={LABEL_CLASS}>
+                      {copy.fields.email.label}
+                    </span>
                     <input
                       type="email"
                       name="email"
@@ -170,11 +207,32 @@ export function RequestModal({ open, onClose, copy }: RequestModalProps) {
                     />
                   </label>
 
-                  <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
+                  <div className="mt-2 flex flex-col gap-3">
                     <p className="text-xs text-foreground/45">{copy.note}</p>
-                    <PillButton type="submit" variant="dark" arrow="up-right">
-                      {status === "sending" ? copy.submitting : copy.submit}
-                    </PillButton>
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                      <PillButton
+                        type="submit"
+                        name="channel"
+                        value="whatsapp"
+                        variant="dark"
+                        className="w-full"
+                      >
+                        <WhatsApp className="text-base" />
+                        <span className="text-[11px] sm:text-xs">
+                          {copy.sendWhatsapp}
+                        </span>
+                      </PillButton>
+                      <PillButton
+                        type="submit"
+                        name="channel"
+                        value="email"
+                        variant="outline"
+                        className="w-full"
+                      >
+                        <Mail className="text-base" />
+                        {copy.sendEmail}
+                      </PillButton>
+                    </div>
                   </div>
                 </form>
               </>

@@ -2,92 +2,105 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
+import Link from "next/link";
 
-import { ArrowUpRight, LogoMark } from "@/components/ui/icons";
+import { ArrowUpRight } from "@/components/ui/icons";
 import { TagChip } from "@/components/ui/tag-chip";
+import { localeHref, type Locale } from "@/core/i18n/config";
 import { SPRING } from "@/core/motion/springs";
 
 import type { Project } from "../data/projects";
 
+const MotionLink = motion.create(Link);
+
 type ProjectCardProps = {
   project: Project;
+  locale: Locale;
   title: string;
   summary: string;
+  categoryLabel: string;
   tags: readonly string[];
+  viewLabel: string;
 };
 
 /**
- * Ink card on the light page — the reference's portfolio card language.
+ * Clean, image-forward case-study card — no watermark, no dimmed overlay
+ * sitting on top of the artwork (see docs/code.md §13). The cover renders at
+ * full brightness in a fixed ratio; the copy and tags live below it, the way
+ * an app-store or product-showcase gallery presents a project rather than
+ * burying it under decoration.
  *
- * Hover lifts the card and rotates the badge from a single variant label on the
- * root, the same pattern as `PillButton`, so the two gestures cannot fall out of
- * sync.
- *
- * Not a link: the detail route does not exist yet, and a card that navigates
- * nowhere is worse than one that does not pretend to. Wrapping this in a `<Link>`
- * is the only change needed when `work/[slug]` lands.
+ * Links to the project's own case-study page — the whole card is the target,
+ * per the Roadmap's original note that `ProjectCard` was built to become one.
  */
 export function ProjectCard({
   project,
+  locale,
   title,
   summary,
+  categoryLabel,
   tags,
+  viewLabel,
 }: ProjectCardProps) {
   return (
-    <motion.article
-      className="relative flex min-h-88 flex-col justify-end overflow-hidden rounded-card bg-ink p-6 text-white ring-1 ring-white/5 sm:min-h-104 sm:p-8"
+    <MotionLink
+      href={localeHref(locale, `/work/${project.slug}`)}
+      className="group flex flex-col overflow-hidden rounded-card border border-line bg-surface"
       initial="rest"
       animate="rest"
       whileHover="hover"
-      variants={{ rest: { y: 0, scale: 1 }, hover: { y: -8, scale: 1.012 } }}
+      whileFocus="hover"
+      variants={{ rest: { y: 0 }, hover: { y: -6 } }}
       transition={SPRING.panel}
     >
-      <Image
-        src={project.cover}
-        alt=""
-        fill
-        sizes="(min-width: 768px) 46vw, 92vw"
-        className="object-cover opacity-35"
-      />
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-background">
+        <motion.div
+          className="absolute inset-0"
+          variants={{ rest: { scale: 1 }, hover: { scale: 1.05 } }}
+          transition={SPRING.panel}
+        >
+          <Image
+            src={project.cover}
+            alt=""
+            fill
+            sizes="(min-width: 1280px) 30vw, (min-width: 640px) 46vw, 92vw"
+            className="object-cover"
+          />
+        </motion.div>
+      </div>
 
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-gradient-to-t from-ink via-ink/75 to-ink/25"
-      />
-
-      <motion.span
-        aria-hidden
-        className="absolute end-6 top-6 grid size-11 place-items-center rounded-pill bg-white/10 text-white ring-1 ring-white/15 sm:end-8 sm:top-8"
-        variants={{
-          rest: { rotate: 0, scale: 1 },
-          hover: { rotate: 45, scale: 1.08 },
-        }}
-        transition={SPRING.nudge}
-      >
-        <ArrowUpRight />
-      </motion.span>
-
-      <LogoMark
-        aria-hidden
-        className="pointer-events-none absolute start-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-6xl text-white/10 rtl:translate-x-1/2"
-      />
-
-      <div className="relative">
-        <h3 className="text-2xl font-medium tracking-[-0.01em] sm:text-3xl">
-          {title}
-        </h3>
-        <p className="mt-2 max-w-112 text-sm text-white/55">{summary}</p>
+      <div className="flex flex-1 flex-col gap-4 p-6 sm:p-7">
+        <div className="space-y-2">
+          <span className="text-micro font-medium uppercase tracking-[0.08em] text-accent">
+            {categoryLabel}
+          </span>
+          <h3 className="text-xl font-medium tracking-[-0.01em] text-foreground sm:text-2xl">
+            {title}
+          </h3>
+          <p className="text-sm text-foreground/60">{summary}</p>
+        </div>
 
         {tags.length > 0 ? (
-          <ul className="mt-5 flex flex-wrap gap-2">
+          <ul className="flex flex-wrap gap-2">
             {tags.map((tag) => (
               <li key={tag}>
-                <TagChip tone="light">{tag}</TagChip>
+                <TagChip tone="dark">{tag}</TagChip>
               </li>
             ))}
           </ul>
         ) : null}
+
+        <span className="mt-auto inline-flex items-center gap-2 pt-2 text-sm font-medium text-foreground">
+          {viewLabel}
+          <motion.span
+            className="inline-flex"
+            variants={{ rest: { x: 0, y: 0 }, hover: { x: 2, y: -2 } }}
+            transition={SPRING.hover}
+          >
+            <ArrowUpRight className="rtl:-scale-x-100" />
+          </motion.span>
+        </span>
       </div>
-    </motion.article>
+    </MotionLink>
   );
 }

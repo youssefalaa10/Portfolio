@@ -260,3 +260,73 @@ export function Gauge(props: IconProps) {
     </svg>
   );
 }
+
+/** WhatsApp glyph, flat single-colour — used by the floating button and CTA. */
+export function WhatsApp(props: IconProps) {
+  return (
+    <svg {...BASE} viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.81L2 22l5.42-1.35a9.86 9.86 0 0 0 4.62 1.15h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2Zm5.8 14.08c-.24.68-1.4 1.3-1.93 1.35-.5.05-1.02.24-3.43-.75-2.9-1.2-4.74-4.12-4.88-4.31-.14-.19-1.17-1.56-1.17-2.98 0-1.42.74-2.11 1-2.4.25-.28.55-.35.74-.35.19 0 .37 0 .53.01.17.01.4-.06.62.48.24.58.81 2 .88 2.14.07.14.12.31.02.5-.09.19-.14.31-.28.47-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.71 1.18 1.53 1.92 1.05.95 1.94 1.25 2.22 1.39.28.14.44.12.6-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.63-.14.26.09 1.64.78 1.92.92.28.14.47.21.53.33.07.12.07.68-.17 1.35Z" />
+    </svg>
+  );
+}
+
+/** Envelope, for mail links next to the WhatsApp channel. */
+export function Mail(props: IconProps) {
+  return (
+    <svg {...STROKE} viewBox="0 0 24 24" strokeWidth={1.6} {...props}>
+      <path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />
+      <path d="m3.5 6.5 8.5 6 8.5-6" />
+    </svg>
+  );
+}
+
+/** LinkedIn glyph, flat single-colour — the standard simplified "in" mark. */
+export function LinkedIn(props: IconProps) {
+  return (
+    <svg {...BASE} viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z" />
+    </svg>
+  );
+}
+
+/** GitHub glyph, flat single-colour — the standard simplified octocat mark. */
+export function GitHub(props: IconProps) {
+  return (
+    <svg {...BASE} viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.09 3.29 9.39 7.86 10.91.57.1.79-.25.79-.55v-2.15c-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.07.78 2.16v3.2c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z" />
+    </svg>
+  );
+}
+
+/**
+ * Brand mark from `public/images/logo.svg`, recoloured to `currentColor` (the
+ * source file hardcodes black) so it works on both the light header and the
+ * dark footer. Non-square on purpose — the mark's own proportions, not the
+ * square-icon convention the rest of this module uses, so width is set
+ * explicitly rather than left at `1em` like every other icon here.
+ *
+ * `viewBox` is cropped tightly to the mark itself rather than the source
+ * file's full `0 0 720 266` canvas — that canvas is mostly empty margin
+ * around a mark occupying only its centre, which read as a small, faint
+ * logo at any font size. Cropping to its real bounding box (with a small
+ * margin) makes it fill its box instead, so the same font size now reads as
+ * a noticeably bigger mark. `width` is retuned to the crop's own aspect
+ * ratio so it isn't stretched or letterboxed at `1em` height.
+ */
+export function BrandMark(props: IconProps) {
+  return (
+    <svg
+      {...BASE}
+      width="0.93em"
+      viewBox="271 40 185 199"
+      fill="currentColor"
+      {...props}
+    >
+      <g transform="translate(0,266) scale(0.1,-0.1)">
+        <path d="M2957 2022 c-70 -70 -127 -131 -127 -135 0 -4 7 -7 16 -7 9 0 69 -27 133 -61 258 -135 383 -260 426 -424 19 -75 19 -141 -1 -263 -24 -145 -15 -274 25 -382 18 -47 35 -88 39 -92 4 -4 8 74 8 175 1 182 1 182 43 342 23 88 47 178 53 200 5 22 8 81 5 130 -6 101 -30 173 -93 277 -46 75 -204 236 -294 299 -112 79 -90 85 -233 -59z" />
+        <path d="M4024 2029 c-45 -9 -119 -29 -165 -44 -82 -27 -253 -107 -262 -122 -5 -8 82 -236 95 -248 3 -4 24 17 46 47 91 123 233 257 371 352 49 33 52 36 25 34 -16 -1 -66 -10 -110 -19z" />
+        <path d="M4350 2033 c-198 -128 -234 -156 -350 -273 -69 -69 -146 -156 -172 -195 -95 -142 -176 -332 -214 -500 -22 -101 -27 -367 -8 -478 19 -117 45 -192 64 -191 12 1 234 155 263 183 4 4 -9 47 -29 96 -129 319 -64 670 184 993 67 88 201 217 283 273 l60 40 -18 31 c-22 38 -31 41 -63 21z" />
+      </g>
+    </svg>
+  );
+}

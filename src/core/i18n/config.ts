@@ -34,8 +34,15 @@ export function getIntlTag(locale: Locale): string {
   return INTL_TAGS[locale];
 }
 
-/** Rewrites a pathname onto another locale, preserving the rest of the route. */
-export function localizePathname(pathname: string, locale: Locale): string {
+/**
+ * Maps a visible, prefix-free pathname onto its internal `/{locale}/...`
+ * route. Every page lives under `app/[locale]/`, so something has to add the
+ * segment back before Next's router can match it — that something is
+ * `src/proxy.ts`, via `NextResponse.rewrite`, and this is the one function it
+ * uses to build that internal URL. Nothing else should call this: it is not
+ * for building hrefs, which are prefix-free (see `localeHref`).
+ */
+export function internalizePathname(pathname: string, locale: Locale): string {
   const segments = pathname.split("/").filter(Boolean);
 
   if (segments.length > 0 && isLocale(segments[0])) {
@@ -47,8 +54,16 @@ export function localizePathname(pathname: string, locale: Locale): string {
   return `/${segments.join("/")}`;
 }
 
-/** Prefixes an app-relative path with the active locale. */
+/**
+ * Builds an app-relative href. Visible URLs carry no locale segment — the
+ * active language is a `NEXT_LOCALE` cookie the proxy reads, not something in
+ * the path — so this only normalises `path`. `locale` stays in the signature
+ * (every call site already has it in scope, and it keeps the door open if a
+ * future requirement brings prefixed URLs back) but a bare path never needs
+ * one added.
+ */
 export function localeHref(locale: Locale, path = "/"): string {
+  void locale;
   const normalized = path === "/" ? "" : path.replace(/^\/+/, "/");
-  return `/${locale}${normalized}`;
+  return normalized || "/";
 }

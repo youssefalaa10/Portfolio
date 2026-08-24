@@ -13,6 +13,9 @@ type SelectedWorkProps = {
   copy: Dictionary["work"];
 };
 
+/** How many cards the home-page teaser shows before pointing to `/work`. */
+const HOME_PREVIEW_COUNT = 6;
+
 /** Home-page work section. `/work` is the dedicated index it links out to. */
 export function SelectedWork({ locale, copy }: SelectedWorkProps) {
   return (
@@ -27,7 +30,12 @@ export function SelectedWork({ locale, copy }: SelectedWorkProps) {
           headingClassName="text-center"
         />
 
-        <ProjectGrid copy={copy.projects} />
+        <ProjectGrid
+          locale={locale}
+          copy={copy.projects}
+          viewLabel={copy.viewProject}
+          limit={HOME_PREVIEW_COUNT}
+        />
 
         <Reveal delay={0.1} className="flex justify-center">
           <PillButton

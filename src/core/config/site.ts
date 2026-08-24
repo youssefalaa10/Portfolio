@@ -13,6 +13,35 @@ export const SITE = {
 /** `mailto:` target, for readers who would rather not use the form. */
 export const CONTACT_HREF = `mailto:${SITE.email}` as const;
 
+/** Builds a `mailto:` link with an optional subject and body, both encoded. */
+export function mailtoHref(options: { subject?: string; body?: string } = {}): string {
+  const params = new URLSearchParams();
+  if (options.subject) params.set("subject", options.subject);
+  if (options.body) params.set("body", options.body);
+  const query = params.toString();
+  return `mailto:${SITE.email}${query ? `?${query}` : ""}`;
+}
+
+/**
+ * WhatsApp contact. Single source of truth for every WhatsApp surface on the
+ * site (the floating button and every project's "request a similar app" CTA),
+ * exactly like `CONTACT_HREF` above — nothing downstream hardcodes a number.
+ * Stored digits-only (country code, no `+`, no spaces), which is the format
+ * `wa.me` expects.
+ */
+export const WHATSAPP_NUMBER = "201289770332" as const;
+
+/** Builds a `wa.me` deep link with a pre-filled, URL-encoded message. */
+export function whatsappHref(message: string): string {
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
+/** Verified from the CV's link annotations — not invented. */
+export const LINKEDIN_URL = "https://www.linkedin.com/in/youssef-alaa32/" as const;
+
+/** Verified from the CV's link annotations — not invented. */
+export const GITHUB_URL = "https://github.com/youssefalaa10" as const;
+
 /**
  * Primary navigation.
  */
@@ -62,7 +91,10 @@ export type SocialLink = {
   readonly tone: "accent" | "surface";
 };
 
-export const SOCIAL_LINKS: readonly SocialLink[] = [];
+export const SOCIAL_LINKS: readonly SocialLink[] = [
+  { label: "LinkedIn", href: LINKEDIN_URL, tone: "accent" },
+  { label: "GitHub", href: GITHUB_URL, tone: "surface" },
+];
 
 /**
  * Support link ("buy me a coffee"). Empty until you paste your URL — the block

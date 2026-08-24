@@ -10,15 +10,12 @@ import {
   PORTRAIT_OBJECT_POSITION_CLASS,
 } from "../constants";
 import { useCursorRelight } from "../hooks/use-cursor-relight";
-import { CursorLens } from "./cursor-lens";
 
 type HeroPortraitProps = {
   alt: string;
-  /** Instruction shown inside the cursor lens. */
-  lensLabel: string;
   /**
-   * Must establish a positioning context — `<Image fill>`, the canvas and the
-   * lens all resolve against it. Deliberately not defaulted to `relative` here:
+   * Must establish a positioning context — `<Image fill>` and the canvas both
+   * resolve against it. Deliberately not defaulted to `relative` here:
    * Tailwind emits `.relative` after `.absolute`, so a built-in `relative` would
    * beat an `absolute` passed by the caller regardless of class order.
    */
@@ -26,18 +23,17 @@ type HeroPortraitProps = {
 };
 
 /**
- * Three layers, one rectangle: the portrait, the light the cursor paints on it,
- * and the lens that tracks the pointer.
+ * Two layers, one rectangle: the portrait, and the light the cursor paints on
+ * it.
  *
- * The box owns the geometry, so none of the layers computes a position — which
- * is what keeps the light registered with the subject at every viewport size.
+ * The box owns the geometry, so neither layer computes a position — which is
+ * what keeps the light registered with the subject at every viewport size.
  */
 export function HeroPortrait({
   alt,
-  lensLabel,
   className,
 }: HeroPortraitProps) {
-  const { containerRef, canvasRef, active } = useCursorRelight({
+  const { containerRef, canvasRef } = useCursorRelight({
     src: HERO_PORTRAIT.rawSrc,
   });
 
@@ -64,8 +60,6 @@ export function HeroPortrait({
         aria-hidden
         className="pointer-events-none absolute inset-0 size-full"
       />
-
-      {active ? <CursorLens targetRef={containerRef} label={lensLabel} /> : null}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { AnimatedLink } from "@/components/ui/animated-link";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { CircleDot, Download, LogoMark } from "@/components/ui/icons";
+import { Download, GitHub, LinkedIn } from "@/components/ui/icons";
 import { PillButton } from "@/components/ui/pill-button";
 import { Shell } from "@/components/ui/shell";
 import { Reveal } from "@/core/components/reveal";
@@ -35,16 +35,10 @@ export function AboutSection({
   return (
     <section id={SECTION_ID.about} className="bg-background">
       <Shell className="grid grid-cols-1 items-center gap-12 py-20 lg:grid-cols-2 lg:py-28">
-        {/* Left: the oversized mark, then the working details.
-            This used to be a giant globe outline. It went with the Globe icon,
-            and it was saying nothing the copy did not already say — the mark
-            carries the same decorative weight while belonging to the brand. */}
+        {/* Left: the eyebrow, then the working details. No background mark and
+            no decorative badge here any more — the copy carries the section on
+            its own, and a plain layout reads calmer next to the statement. */}
         <div className="relative flex min-h-56 flex-col justify-between gap-10 lg:min-h-80">
-          <LogoMark
-            aria-hidden
-            className="pointer-events-none absolute -top-6 start-0 text-[11rem] text-foreground/[0.06] sm:text-[15rem] lg:-start-6 lg:text-[18rem]"
-          />
-
           <Reveal preset="fade-up" distance={0.625} className="relative">
             <Eyebrow>{copy.eyebrow}</Eyebrow>
           </Reveal>
@@ -115,13 +109,13 @@ export function AboutSection({
                         rel="noreferrer noopener"
                         aria-label={social.label}
                         className={cn(
-                          "grid size-9 place-items-center rounded-pill text-sm transition-transform hover:scale-110",
+                          "grid size-9 place-items-center rounded-pill text-base transition-transform hover:scale-110",
                           social.tone === "accent"
                             ? "bg-accent text-white"
                             : "bg-surface text-foreground/70",
                         )}
                       >
-                        <CircleDot />
+                        <SocialIcon label={social.label} />
                       </a>
                     </li>
                   ))}
@@ -154,4 +148,18 @@ export function AboutSection({
       </Shell>
     </section>
   );
+}
+
+/** Maps a `SocialLink.label` to its glyph. Falls back to initials for a
+ * platform that doesn't have one yet, so adding a handle never needs a code
+ * change here first. */
+function SocialIcon({ label }: { label: string }) {
+  switch (label) {
+    case "LinkedIn":
+      return <LinkedIn />;
+    case "GitHub":
+      return <GitHub />;
+    default:
+      return <span aria-hidden>{label.slice(0, 2)}</span>;
+  }
 }
