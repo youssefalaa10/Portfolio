@@ -122,9 +122,6 @@ export function SiteFooter({ locale, copy, navLabels }: SiteFooterProps) {
 
         <div className="flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/45 sm:flex-row">
           <span>{copy.legal.replace("{year}", String(year))}</span>
-          <span className="inline-flex items-center gap-2">
-            {copy.builtWith}
-          </span>
         </div>
       </Shell>
     </footer>

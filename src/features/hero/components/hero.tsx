@@ -38,7 +38,6 @@ export function Hero({ locale, copy }: HeroProps) {
     >
       <HeroVisual
         portraitAlt={copy.portraitAlt}
-        lensLabel={copy.lensLabel}
         watermark={copy.watermark}
       />
 

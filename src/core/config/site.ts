@@ -14,6 +14,20 @@ export const SITE = {
 export const CONTACT_HREF = `mailto:${SITE.email}` as const;
 
 /**
+ * WhatsApp contact. Single source of truth for every WhatsApp surface on the
+ * site (the floating button and every project's "request a similar app" CTA),
+ * exactly like `CONTACT_HREF` above — nothing downstream hardcodes a number.
+ * Stored digits-only (country code, no `+`, no spaces), which is the format
+ * `wa.me` expects.
+ */
+export const WHATSAPP_NUMBER = "201289770332" as const;
+
+/** Builds a `wa.me` deep link with a pre-filled, URL-encoded message. */
+export function whatsappHref(message: string): string {
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
+/**
  * Primary navigation.
  */
 export type NavKey = "work" | "services" | "about" | "contact";

@@ -45,12 +45,3 @@ export const REVEAL = {
  */
 export const PORTRAIT_BASE_FILTER =
   "saturate-[0.12] contrast-[1.06] brightness-[1.02]";
-
-/** The cursor lens that tracks the pointer across the portrait. */
-export const CURSOR_LENS = {
-  /** Diameter in rem, so it scales with the adaptive grid. */
-  size: 5.5,
-  /** How hard the lens chases the pointer. Lower trails further behind. */
-  stiffness: 260,
-  damping: 28,
-} as const;

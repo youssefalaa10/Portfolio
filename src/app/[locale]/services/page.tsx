@@ -25,5 +25,5 @@ export default async function Page({ params }: Props) {
 
   const dictionary = await getDictionary(locale);
 
-  return <ServicesPage locale={locale} copy={dictionary.services} />;
+  return <ServicesPage copy={dictionary.services} />;
 }

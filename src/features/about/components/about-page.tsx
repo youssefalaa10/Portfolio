@@ -1,41 +1,34 @@
 "use client";
 
 import { motion } from "motion/react";
-import Image from "next/image";
 
 import {
   ArrowRight,
-  CheckCircle,
-  CircleDot,
   Cpu,
   Download,
   Layers,
-  Layout,
-  Lightbulb,
-  LogoMark,
   Shield,
-  Smartphone,
 } from "@/components/ui/icons";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { HangingIdCard } from "@/components/lightswind/hanging-id-card";
+import { ScrollTimeline } from "@/components/lightswind/scroll-timeline";
 import { LineReveal } from "@/core/components/line-reveal";
-import { PillButton } from "@/components/ui/pill-button";
 import { Reveal } from "@/core/components/reveal";
 import { Shell } from "@/components/ui/shell";
 import { SupportCard } from "./support-card";
-import { CV_ASSET, HERO_PORTRAIT } from "@/core/config/assets";
-import { CONTACT_HREF, SITE } from "@/core/config/site";
-import type { Locale } from "@/core/i18n/config";
+import { TIMELINE_COMPANIES } from "../data/timeline";
+import { CV_ASSET } from "@/core/config/assets";
+import { SITE } from "@/core/config/site";
 import type { Dictionary } from "@/core/i18n/dictionaries";
-import { SPRING, STAGGER } from "@/core/motion/springs";
+import { STAGGER } from "@/core/motion/springs";
 import { fadeUp, ONCE_IN_VIEW } from "@/core/motion/variants";
 import { useRequestModal } from "@/features/contact/components/request-modal-provider";
 
 type AboutPageProps = {
-  locale: Locale;
   copy: Dictionary["about"];
 };
 
-export function AboutPage({ locale, copy }: AboutPageProps) {
+export function AboutPage({ copy }: AboutPageProps) {
   const { open } = useRequestModal();
   const page = copy.page;
 
@@ -49,6 +42,13 @@ export function AboutPage({ locale, copy }: AboutPageProps) {
         return <Cpu className="text-2xl text-accent" />;
     }
   };
+
+  const timelineEvents = page.timeline.map((entry, index) => ({
+    year: entry.year,
+    title: entry.role,
+    subtitle: TIMELINE_COMPANIES[index] ?? "",
+    description: entry.description,
+  }));
 
   return (
     <div className="bg-background text-foreground">
@@ -99,29 +99,19 @@ export function AboutPage({ locale, copy }: AboutPageProps) {
               </Reveal>
             </div>
 
-            {/* Portrait Card */}
-            <div className="relative lg:col-span-5">
+            {/* Hanging ID card — replaces the earlier portrait treatment. */}
+            <div className="relative flex justify-center lg:col-span-5 lg:justify-end">
               <motion.div
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ ...SPRING.reveal, delay: 0.2 }}
-                className="relative mx-auto aspect-[4/5] max-w-sm overflow-hidden rounded-card border border-line bg-surface-2 shadow-xl"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
               >
-                <Image
-                  src={HERO_PORTRAIT.src}
-                  alt={SITE.name}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 400px"
-                  className="object-cover object-top"
+                <HangingIdCard
+                  name={SITE.name}
+                  role={copy.hangingCard.role}
+                  badgeId={`FLT-${SITE.workingSince}`}
+                  ropeLength={96}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute bottom-6 start-6 end-6 text-white">
-                  <div className="flex items-center gap-2 text-xs font-medium text-white/80">
-                    <CircleDot className="text-sm text-accent-from" />
-                    <span>{copy.location}</span>
-                  </div>
-                  <div className="mt-1 text-lg font-semibold">{SITE.name}</div>
-                </div>
               </motion.div>
             </div>
           </div>
@@ -168,41 +158,15 @@ export function AboutPage({ locale, copy }: AboutPageProps) {
 
       {/* JOURNEY & TIMELINE */}
       <section className="border-b border-line bg-surface/30 py-20 lg:py-28">
-        <Shell className="space-y-12">
-          <div className="max-w-2xl">
-            <Eyebrow>{page.eyebrow}</Eyebrow>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-              {page.timelineHeading}
-            </h2>
-          </div>
-
-          <div className="space-y-6">
-            {page.timeline.map((event, index) => (
-              <motion.div
-                key={event.year}
-                variants={fadeUp(1.5)}
-                initial="hidden"
-                whileInView="visible"
-                viewport={ONCE_IN_VIEW}
-                transition={{ delay: index * 0.08 }}
-                className="relative rounded-card-sm border border-line bg-background p-6 transition-all hover:border-foreground/30 sm:p-8"
-              >
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                  <div className="space-y-2">
-                    <span className="inline-block rounded-pill bg-surface px-3 py-1 font-mono text-xs font-medium text-accent">
-                      {event.year}
-                    </span>
-                    <h3 className="text-xl font-semibold text-foreground">
-                      {event.role}
-                    </h3>
-                    <p className="max-w-2xl text-sm font-light leading-relaxed text-foreground/70">
-                      {event.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+        <Shell>
+          <ScrollTimeline
+            events={timelineEvents}
+            title={page.timelineHeading}
+            subtitle={copy.eyebrow}
+            progressIndicator
+            cardAlignment="alternating"
+            revealAnimation="fade"
+          />
         </Shell>
       </section>
 
@@ -210,7 +174,7 @@ export function AboutPage({ locale, copy }: AboutPageProps) {
       <section className="border-b border-line py-20 lg:py-28">
         <Shell className="space-y-12">
           <div className="max-w-2xl">
-            <Eyebrow>{page.eyebrow}</Eyebrow>
+            <Eyebrow>{copy.eyebrow}</Eyebrow>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
               {page.skillsHeading}
             </h2>
@@ -246,7 +210,6 @@ export function AboutPage({ locale, copy }: AboutPageProps) {
       {/* CTA STRIP */}
       <section className="bg-ink py-20 text-white lg:py-28">
         <Shell className="flex flex-col items-center gap-8 text-center">
-          <LogoMark className="text-4xl text-accent-from" />
           <div className="max-w-2xl space-y-4">
             <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
               {page.ctaHeading}

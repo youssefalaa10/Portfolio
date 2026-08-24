@@ -3,7 +3,6 @@ import { HeroWatermark } from "./hero-watermark";
 
 type HeroVisualProps = {
   portraitAlt: string;
-  lensLabel: string;
   watermark: string;
 };
 
@@ -27,7 +26,6 @@ type HeroVisualProps = {
  */
 export function HeroVisual({
   portraitAlt,
-  lensLabel,
   watermark,
 }: HeroVisualProps) {
   return (
@@ -36,15 +34,14 @@ export function HeroVisual({
 
       <HeroWatermark>{watermark}</HeroWatermark>
 
-      {/* The portrait box owns the geometry that the image, the relight canvas
-          and the cursor lens all fill. It sits on the bottom edge so the subject
-          is always cropped by the frame rather than floating, at every width. */}
+      {/* The portrait box owns the geometry that the image and the relight
+          canvas both fill. It sits on the bottom edge so the subject is always
+          cropped by the frame rather than floating, at every width. */}
       {/* On phones the headline has to run across the portrait, so the portrait
           steps back to being a backdrop. At `sm` and up the columns separate and
           it comes forward as the subject again. */}
       <HeroPortrait
         alt={portraitAlt}
-        lensLabel={lensLabel}
         className="portrait-fade absolute bottom-0 end-0 h-full w-[92%] opacity-55 sm:w-[70%] sm:opacity-100 lg:w-[56%] xl:w-[52%]"
       />
 

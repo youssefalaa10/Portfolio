@@ -12,6 +12,7 @@ import {
 } from "@/core/i18n/config";
 import { getDictionary } from "@/core/i18n/dictionaries";
 import { RequestModalProvider } from "@/features/contact/components/request-modal-provider";
+import { WhatsAppFloatingButton } from "@/features/contact/components/whatsapp-floating-button";
 import { SiteFooter } from "@/features/footer/components/site-footer";
 import { SiteHeader } from "@/features/navigation/components/site-header";
 
@@ -130,6 +131,13 @@ export default async function LocaleLayout({
               locale={locale}
               copy={dictionary.footer}
               navLabels={dictionary.nav}
+            />
+
+            {/* Global, singular — same "one shared instance" reasoning as the
+                request dialog above (docs/code.md §13). */}
+            <WhatsAppFloatingButton
+              label={dictionary.whatsapp.floatingLabel}
+              message={dictionary.whatsapp.messageGeneric}
             />
           </RequestModalProvider>
         </MotionConfig>

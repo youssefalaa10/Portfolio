@@ -25,5 +25,5 @@ export default async function Page({ params }: Props) {
 
   const dictionary = await getDictionary(locale);
 
-  return <WorkPage copy={dictionary.work} />;
+  return <WorkPage locale={locale} copy={dictionary.work} />;
 }
