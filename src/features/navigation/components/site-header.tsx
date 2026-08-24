@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { HoverLift } from "@/components/ui/hover-lift";
-import { Download, LogoMark, MenuGrid } from "@/components/ui/icons";
+import { BrandMark, Download, MenuGrid } from "@/components/ui/icons";
 import { Shell } from "@/components/ui/shell";
 import { CV_ASSET } from "@/core/config/assets";
 import { localeHref, type Locale } from "@/core/i18n/config";
@@ -63,7 +63,7 @@ export function SiteHeader({ locale, labels, copy }: SiteHeaderProps) {
               spring="hover"
               className="flex items-center gap-2 text-lg font-semibold tracking-[-0.01em] text-foreground"
             >
-              <LogoMark className="text-xl text-accent" />
+              <BrandMark className="text-2xl text-foreground" />
               {copy.brand}
             </HoverLift>
           </Link>

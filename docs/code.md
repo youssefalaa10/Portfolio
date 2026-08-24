@@ -136,26 +136,50 @@ return <HomePage locale={locale} dictionary={dictionary} />;
 
 ## 4. Routing
 
-Every route lives under `/{locale}`. `src/proxy.ts` redirects a bare path to the
-best locale from `Accept-Language`, falling back to `en`.
+Every page still lives under `app/[locale]/...`, but the visible URL never
+carries a locale segment. **This is a deliberate deviation from this contract's
+original locale-prefixed routing**, made per the process in the header of this
+document: the user asked for URLs with no `/en`/`/ar` in them, so the app root
+segment stays `[locale]` internally (Next 16 requires the root layout's segment
+to be where `lang`/`dir` are set — see §2), while `src/proxy.ts` rewrites a
+bare, prefix-free request onto `/{locale}/...` before Next's router ever sees
+it. Language is a `NEXT_LOCALE` cookie, resolved on first visit from
+`Accept-Language` (falling back to `en`) and set again whenever
+`LocaleSwitcher` is used — never encoded in the path. A request that still
+names a locale explicitly (an old bookmark, a crawler) is 301-redirected to the
+prefix-free equivalent, so exactly one URL ever serves a given page.
 
-| Route                                | State                                 |
-| ------------------------------------ | ------------------------------------- |
-| `/en`, `/ar`                         | built — the full home page            |
-| `/en/work`, `/ar/work`               | built (index; factual copy only)      |
-| `/{locale}/work/[slug]`              | built — case study per project (19)   |
-| `/{locale}/{about,services,contact}` | **not planned as routes** — see below |
+| Route                    | State                                 |
+| ------------------------ | -------------------------------------- |
+| `/`                       | built — the full home page            |
+| `/work`                   | built (index; factual copy only)      |
+| `/work/[slug]`             | built — case study per project (19)   |
+| `/{about,services,contact}` | **not planned as routes** — see below |
 
 About and Services are **sections of the home page**, reached by hash anchor;
 Contact opens the request dialog. That is sanctioned section navigation, not faked
 multi-page routing — `/work` is a real route with its own page and metadata. What
 each nav item does is declared once, as `kind` on `NavItem` in
 `core/config/site.ts`, and `features/navigation/components/nav-link.tsx` is the
-only place that reads it. Anchor hrefs are built locale-first (`/en#services`) so
-they still resolve from `/work`.
+only place that reads it. Anchor hrefs resolve from `/work` the same way they did
+under the old prefixed scheme (`#services`), just without a locale segment to
+carry along.
 
-Both locales are prerendered via `generateStaticParams`, and `dynamicParams =
-false` makes any other locale a 404 rather than a silently generated page.
+Both locales are still prerendered via `generateStaticParams` (Next needs a
+static `[locale]` param set for the internal route to build), and
+`dynamicParams = false` makes any other locale a 404 rather than a silently
+generated page — a reader just never sees `[locale]` in the address bar to
+reach one directly.
+
+**SEO trade-off, accepted knowingly:** a crawler carries no cookie, so it only
+ever sees default-locale (`en`) content at each URL. There is no
+`alternates.languages` entry in `generateMetadata` any more (see
+`app/[locale]/layout.tsx`) because both locales now share one URL — a
+`hreflang` pointing every language at the same href is not what that
+annotation means, so it was removed rather than left misleading. If Arabic
+discoverability in search results becomes a requirement, that calls for a
+second, explicit `/ar` route tree (or reverting this section) — not a patch to
+the current single-URL rewrite.
 
 `app/` is never renamed or replaced. `features/` is not a substitute for the App
 Router.
@@ -263,11 +287,12 @@ Two consequences to remember when editing:
 
 Locales: `en` (ltr), `ar` (rtl). Contract lives in `src/core/i18n/config.ts`.
 
-**No i18n library.** What this project needs is locale-prefixed routes, a typed
-message bundle, and `Intl` where relevant — all of which the platform and the App
-Router already provide. `next-intl` would add a dependency, a provider, and a
-config file to replace ~120 lines. Revisit if ICU message formatting,
-pluralisation rules, or per-namespace lazy loading become real requirements.
+**No i18n library.** What this project needs is a locale-aware route (internally
+prefixed, see §4 for why the visible URL is not), a typed message bundle, and
+`Intl` where relevant — all of which the platform and the App Router already
+provide. `next-intl` would add a dependency, a provider, and a config file to
+replace ~120 lines. Revisit if ICU message formatting, pluralisation rules, or
+per-namespace lazy loading become real requirements.
 
 **Rules**
 
@@ -749,7 +774,8 @@ npx next build                          # production build
 
 Then check by hand:
 
-- [ ] `/en` and `/ar` render; `/` redirects
+- [ ] `/` renders in both languages (switch via `LocaleSwitcher`, no URL change);
+      an explicit `/en` or `/ar` redirects to the prefix-free path
 - [ ] LTR and RTL both correct — spacing, arrows, masks, gradients
 - [ ] mobile, tablet, desktop and >1920px compositions
 - [ ] reduced motion: content fully present, no transforms, no reveal canvas

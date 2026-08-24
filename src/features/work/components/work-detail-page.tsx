@@ -33,6 +33,9 @@ export type WorkDetailCopy = {
   techStackLabel: string;
   galleryLabel: string;
   back: string;
+  previousImage: string;
+  nextImage: string;
+  closePreview: string;
 };
 
 type WorkDetailPageProps = {
@@ -131,6 +134,9 @@ export function WorkDetailPage({
                 images={project.gallery}
                 label={detail.galleryLabel}
                 category={project.category}
+                previousLabel={detail.previousImage}
+                nextLabel={detail.nextImage}
+                closeLabel={detail.closePreview}
               />
             </Reveal>
           </Shell>

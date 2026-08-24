@@ -266,7 +266,7 @@ export function ServicesPage({ copy }: ServicesPageProps) {
 
           <div className="grid gap-6 md:grid-cols-2">
             {page.nodes.items.map((node, index) => (
-              <><motion.div
+              <motion.div
                 key={node.id}
                 variants={fadeUp(1.5)}
                 initial="hidden"
@@ -318,7 +318,7 @@ export function ServicesPage({ copy }: ServicesPageProps) {
                     <ArrowUpRight className="text-sm rtl:-scale-x-100" />
                   </button>
                 </div>
-              </motion.div></>
+              </motion.div>
             ))}
           </div>
         </Shell>

@@ -1,5 +1,5 @@
 import { AnimatedLink } from "@/components/ui/animated-link";
-import { Download, LogoMark } from "@/components/ui/icons";
+import { BrandMark, Download } from "@/components/ui/icons";
 import { Shell } from "@/components/ui/shell";
 import { LineReveal } from "@/core/components/line-reveal";
 import { CV_ASSET } from "@/core/config/assets";
@@ -56,7 +56,7 @@ export function SiteFooter({ locale, copy, navLabels }: SiteFooterProps) {
         <div className="grid grid-cols-1 gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col gap-3">
             <span className="flex items-center gap-2 text-lg font-semibold">
-              <LogoMark className="text-xl text-accent-from" />
+              <BrandMark className="text-2xl text-white" />
               {copy.brand}
             </span>
             <p className="max-w-80 text-sm text-white/55">{copy.tagline}</p>

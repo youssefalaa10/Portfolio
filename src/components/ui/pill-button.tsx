@@ -35,7 +35,16 @@ type PillButtonProps = PillButtonBaseProps &
         type?: never;
       }
     | { href?: never; download?: never; onClick: () => void; type?: "button" }
-    | { href?: never; download?: never; onClick?: never; type: "submit" }
+    | {
+        href?: never;
+        download?: never;
+        onClick?: never;
+        type: "submit";
+        /** Read on the form's `onSubmit` via `event.nativeEvent.submitter` to
+         * tell two submit buttons in the same form apart. */
+        name?: string;
+        value?: string;
+      }
   );
 
 const SURFACE: Record<Variant, string> = {
@@ -148,6 +157,9 @@ export function PillButton(props: PillButtonProps) {
       {...gesture}
       type={props.type ?? "button"}
       onClick={props.onClick}
+      {...(props.type === "submit"
+        ? { name: props.name, value: props.value }
+        : null)}
     >
       {content}
     </motion.button>

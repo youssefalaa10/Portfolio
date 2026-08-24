@@ -61,9 +61,17 @@ export async function generateMetadata({
   return {
     title: dictionary.meta.title,
     description: dictionary.meta.description,
+    // Both locales render at the same prefix-free URL now (the active
+    // language is a `NEXT_LOCALE` cookie, not a path segment — see
+    // `src/proxy.ts` and docs/code.md §4/§7) — so there is exactly one URL
+    // per page and no `alternates.languages` to declare: a `hreflang` entry
+    // per locale would point every language at the same href, which is not
+    // what that annotation means. This is a deliberate SEO trade-off: a
+    // crawler only ever sees the default-locale content, since it never
+    // carries the cookie a real reader picks up from `Accept-Language` or the
+    // switcher.
     alternates: {
-      canonical: `/${locale}`,
-      languages: Object.fromEntries(LOCALES.map((code) => [code, `/${code}`])),
+      canonical: "/",
     },
     openGraph: {
       title: dictionary.meta.title,

@@ -62,7 +62,9 @@
       "availability": "متاح للعمل",
       "location": "عن بعد، من أي مكان",
       "scroll": "اسحب للاستكشاف"
-    }
+    },
+    "linkedinLabel": "فتح الملف الشخصي على لينكدإن",
+    "mailLabel": "مراسلة يوسف عبر البريد"
   },
   "showcase": {
     "eyebrow": "تطوير تطبيقات الجوال",
@@ -656,7 +658,10 @@
       "capabilitiesLabel": "الإمكانيات الأساسية",
       "techStackLabel": "التقنيات المستخدمة",
       "galleryLabel": "لقطات من التطبيق",
-      "back": "العودة إلى كل الأعمال"
+      "back": "العودة إلى كل الأعمال",
+      "previousImage": "الصورة السابقة",
+      "nextImage": "الصورة التالية",
+      "closePreview": "إغلاق المعاينة"
     }
   },
   "services": {
@@ -869,13 +874,15 @@
       }
     },
     "note": "أرد خلال يوم عمل واحد.",
-    "submit": "إرسال الطلب",
-    "submitting": "جار الإرسال…",
     "success": {
       "heading": "تم استلام الطلب",
       "body": "شكرا لتواصلك — سأعود إليك خلال يوم عمل واحد.",
       "close": "إغلاق"
-    }
+    },
+    "sendWhatsapp": "إرسال عبر واتساب",
+    "sendEmail": "إرسال عبر البريد الإلكتروني",
+    "messageTemplate": "استفسار مشروع جديد من {name} ({email}):\n\n{project}",
+    "emailSubject": "استفسار مشروع جديد"
   },
   "notFound": {
     "eyebrow": "404",

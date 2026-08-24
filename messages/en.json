@@ -62,7 +62,9 @@
       "availability": "Available for work",
       "location": "Remote-first, worldwide",
       "scroll": "Scroll to explore"
-    }
+    },
+    "linkedinLabel": "Open LinkedIn profile",
+    "mailLabel": "Email Youssef"
   },
   "showcase": {
     "eyebrow": "Mobile development",
@@ -656,7 +658,10 @@
       "capabilitiesLabel": "Key capabilities",
       "techStackLabel": "Tech stack",
       "galleryLabel": "Screens",
-      "back": "Back to all work"
+      "back": "Back to all work",
+      "previousImage": "Previous image",
+      "nextImage": "Next image",
+      "closePreview": "Close preview"
     }
   },
   "services": {
@@ -869,13 +874,15 @@
       }
     },
     "note": "I reply within one business day.",
-    "submit": "Send request",
-    "submitting": "Sending…",
     "success": {
       "heading": "Request received",
       "body": "Thanks for reaching out — I'll get back to you within one business day.",
       "close": "Close"
-    }
+    },
+    "sendWhatsapp": "Send via WhatsApp",
+    "sendEmail": "Send via email",
+    "messageTemplate": "New project inquiry from {name} ({email}):\n\n{project}",
+    "emailSubject": "New project inquiry"
   },
   "notFound": {
     "eyebrow": "404",

@@ -1,6 +1,6 @@
 import { AnimatedLink } from "@/components/ui/animated-link";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { Download } from "@/components/ui/icons";
+import { Download, GitHub, LinkedIn } from "@/components/ui/icons";
 import { PillButton } from "@/components/ui/pill-button";
 import { Shell } from "@/components/ui/shell";
 import { Reveal } from "@/core/components/reveal";
@@ -109,13 +109,13 @@ export function AboutSection({
                         rel="noreferrer noopener"
                         aria-label={social.label}
                         className={cn(
-                          "grid size-9 place-items-center rounded-pill text-micro font-medium uppercase transition-transform hover:scale-110",
+                          "grid size-9 place-items-center rounded-pill text-base transition-transform hover:scale-110",
                           social.tone === "accent"
                             ? "bg-accent text-white"
                             : "bg-surface text-foreground/70",
                         )}
                       >
-                        {social.label.slice(0, 2)}
+                        <SocialIcon label={social.label} />
                       </a>
                     </li>
                   ))}
@@ -148,4 +148,18 @@ export function AboutSection({
       </Shell>
     </section>
   );
+}
+
+/** Maps a `SocialLink.label` to its glyph. Falls back to initials for a
+ * platform that doesn't have one yet, so adding a handle never needs a code
+ * change here first. */
+function SocialIcon({ label }: { label: string }) {
+  switch (label) {
+    case "LinkedIn":
+      return <LinkedIn />;
+    case "GitHub":
+      return <GitHub />;
+    default:
+      return <span aria-hidden>{label.slice(0, 2)}</span>;
+  }
 }
